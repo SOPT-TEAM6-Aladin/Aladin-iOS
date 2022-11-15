@@ -54,14 +54,150 @@
 		8E333A9C292293FF003E08B4 /* Aladin-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				8E333A9D292293FF003E08B4 /* AppDelegate.swift */,
-				8E333A9F292293FF003E08B4 /* SceneDelegate.swift */,
-				8E333AA1292293FF003E08B4 /* ViewController.swift */,
-				8E333AA629229400003E08B4 /* Assets.xcassets */,
-				8E333AA829229400003E08B4 /* LaunchScreen.storyboard */,
+				8E7984BC29235F8300EDC6E3 /* Network */,
+				8E7984BB29235F7600EDC6E3 /* Global */,
+				8E7984BD29235F8D00EDC6E3 /* Screens */,
 				8E333AAB29229400003E08B4 /* Info.plist */,
 			);
 			path = "Aladin-iOS";
+			sourceTree = "<group>";
+		};
+		8E7984BB29235F7600EDC6E3 /* Global */ = {
+			isa = PBXGroup;
+			children = (
+				8E7984CA2923604700EDC6E3 /* Extension */,
+				8E7984C62923602E00EDC6E3 /* Supports */,
+				8E7984C92923604100EDC6E3 /* Literals */,
+				8E7984CB2923605800EDC6E3 /* Utils */,
+				8E7984C82923603900EDC6E3 /* UIComponent */,
+				8E7984C72923603200EDC6E3 /* Resources */,
+			);
+			path = Global;
+			sourceTree = "<group>";
+		};
+		8E7984BC29235F8300EDC6E3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				8E7984C42923601C00EDC6E3 /* API */,
+				8E7984C52923602400EDC6E3 /* Service */,
+				8E7984C32923601700EDC6E3 /* Model */,
+				8E7984C22923600F00EDC6E3 /* Foundation */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		8E7984BD29235F8D00EDC6E3 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				8E7984BF29235FB300EDC6E3 /* TabBar */,
+				8E7984C029235FBD00EDC6E3 /* MyPage */,
+				8E7984BE29235FAE00EDC6E3 /* Home */,
+				8E7984C129235FE800EDC6E3 /* ShoppingBasket */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		8E7984BE29235FAE00EDC6E3 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8E7984BF29235FB300EDC6E3 /* TabBar */ = {
+			isa = PBXGroup;
+			children = (
+				8E333AA1292293FF003E08B4 /* ViewController.swift */,
+			);
+			path = TabBar;
+			sourceTree = "<group>";
+		};
+		8E7984C029235FBD00EDC6E3 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		8E7984C129235FE800EDC6E3 /* ShoppingBasket */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ShoppingBasket;
+			sourceTree = "<group>";
+		};
+		8E7984C22923600F00EDC6E3 /* Foundation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Foundation;
+			sourceTree = "<group>";
+		};
+		8E7984C32923601700EDC6E3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8E7984C42923601C00EDC6E3 /* API */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		8E7984C52923602400EDC6E3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		8E7984C62923602E00EDC6E3 /* Supports */ = {
+			isa = PBXGroup;
+			children = (
+				8E333AA829229400003E08B4 /* LaunchScreen.storyboard */,
+				8E333A9D292293FF003E08B4 /* AppDelegate.swift */,
+				8E333A9F292293FF003E08B4 /* SceneDelegate.swift */,
+			);
+			path = Supports;
+			sourceTree = "<group>";
+		};
+		8E7984C72923603200EDC6E3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8E333AA629229400003E08B4 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8E7984C82923603900EDC6E3 /* UIComponent */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UIComponent;
+			sourceTree = "<group>";
+		};
+		8E7984C92923604100EDC6E3 /* Literals */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Literals;
+			sourceTree = "<group>";
+		};
+		8E7984CA2923604700EDC6E3 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		8E7984CB2923605800EDC6E3 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
