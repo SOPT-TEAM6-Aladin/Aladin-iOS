@@ -32,9 +32,9 @@ final class MainTBC: UITabBarController {
         let safeHeight = view.safeAreaInsets.bottom
         var tabFrame = self.tabBar.frame
         tabFrame.size.width = tabBarWidth
-        tabFrame.size.height = tabBarHeight
+        tabFrame.size.height = tabBarHeight + safeHeight
         tabFrame.origin.x = (self.view.frame.size.width - tabBarWidth) / 2
-        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight - safeHeight
+        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight
         self.tabBar.frame = tabFrame
     }
     
