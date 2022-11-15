@@ -65,7 +65,7 @@ final class MainTBC: UITabBarController {
         appearance.clipsToBounds = true
         
         tabBar.backgroundColor = .white
-        tabBar.tintColor = .blue
+        tabBar.tintColor = .aladinBlue
         tabBar.unselectedItemTintColor = .black
     }
 
