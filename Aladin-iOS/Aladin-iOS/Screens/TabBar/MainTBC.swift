@@ -12,7 +12,7 @@ final class MainTBC: UITabBarController {
     // MARK: - Properties
     private var freshLaunch = true
     private let tabBarHeight: CGFloat = 96
-    private let tabBarWidth: CGFloat = 300
+    private let tabBarWidth: CGFloat = 270
 
     // MARK: - View Life Cycle
 
