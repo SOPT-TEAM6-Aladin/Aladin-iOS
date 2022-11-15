@@ -40,18 +40,18 @@ final class MainTBC: UITabBarController {
     
     private func setViewControllers() {
         let myPageNVC = makeNavigationController(
-            unselectedImage: UIImage(named: "ic_my"),
-            selectedImage: UIImage(named: "ic_my"),
+            unselectedImage: ImageLiterals.MainTBC.myPageTabIcn,
+            selectedImage: ImageLiterals.MainTBC.myPageTabIcn,
             rootViewController: MyPageVC())
 
         let homeNVC = makeNavigationController(
-            unselectedImage: UIImage(named: "ic_home"),
-            selectedImage: UIImage(named: "ic_home"),
+            unselectedImage: ImageLiterals.MainTBC.homeTabIcn,
+            selectedImage: ImageLiterals.MainTBC.homeTabIcn,
             rootViewController: HomeVC())
 
         let basketNVC = makeNavigationController(
-            unselectedImage: UIImage(named: "ic_basket"),
-            selectedImage: UIImage(named: "ic_basket"),
+            unselectedImage: ImageLiterals.MainTBC.basketTabIcn,
+            selectedImage: ImageLiterals.MainTBC.basketTabIcn,
             rootViewController: BasketVC())
 
         viewControllers = [myPageNVC, homeNVC, basketNVC]
