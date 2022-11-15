@@ -92,7 +92,7 @@
 				8E7984BF29235FB300EDC6E3 /* TabBar */,
 				8E7984C029235FBD00EDC6E3 /* MyPage */,
 				8E7984BE29235FAE00EDC6E3 /* Home */,
-				8E7984C129235FE800EDC6E3 /* ShoppingBasket */,
+				8E7984C129235FE800EDC6E3 /* Basket */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -119,11 +119,11 @@
 			path = MyPage;
 			sourceTree = "<group>";
 		};
-		8E7984C129235FE800EDC6E3 /* ShoppingBasket */ = {
+		8E7984C129235FE800EDC6E3 /* Basket */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = ShoppingBasket;
+			path = Basket;
 			sourceTree = "<group>";
 		};
 		8E7984C22923600F00EDC6E3 /* Foundation */ = {
