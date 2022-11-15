@@ -10,7 +10,6 @@
 		8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9D292293FF003E08B4 /* AppDelegate.swift */; };
 		8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9F292293FF003E08B4 /* SceneDelegate.swift */; };
 		8E333AA2292293FF003E08B4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333AA1292293FF003E08B4 /* ViewController.swift */; };
-		8E333AA5292293FF003E08B4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E333AA3292293FF003E08B4 /* Main.storyboard */; };
 		8E333AA729229400003E08B4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8E333AA629229400003E08B4 /* Assets.xcassets */; };
 		8E333AAA29229400003E08B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8E333AA829229400003E08B4 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -20,7 +19,6 @@
 		8E333A9D292293FF003E08B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E333A9F292293FF003E08B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8E333AA1292293FF003E08B4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		8E333AA4292293FF003E08B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8E333AA629229400003E08B4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8E333AA929229400003E08B4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8E333AAB29229400003E08B4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -59,7 +57,6 @@
 				8E333A9D292293FF003E08B4 /* AppDelegate.swift */,
 				8E333A9F292293FF003E08B4 /* SceneDelegate.swift */,
 				8E333AA1292293FF003E08B4 /* ViewController.swift */,
-				8E333AA3292293FF003E08B4 /* Main.storyboard */,
 				8E333AA629229400003E08B4 /* Assets.xcassets */,
 				8E333AA829229400003E08B4 /* LaunchScreen.storyboard */,
 				8E333AAB29229400003E08B4 /* Info.plist */,
@@ -127,7 +124,6 @@
 			files = (
 				8E333AAA29229400003E08B4 /* LaunchScreen.storyboard in Resources */,
 				8E333AA729229400003E08B4 /* Assets.xcassets in Resources */,
-				8E333AA5292293FF003E08B4 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,14 +143,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		8E333AA3292293FF003E08B4 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				8E333AA4292293FF003E08B4 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		8E333AA829229400003E08B4 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,7 +280,7 @@
 				INFOPLIST_FILE = "Aladin-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
@@ -321,7 +309,7 @@
 				INFOPLIST_FILE = "Aladin-iOS/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
