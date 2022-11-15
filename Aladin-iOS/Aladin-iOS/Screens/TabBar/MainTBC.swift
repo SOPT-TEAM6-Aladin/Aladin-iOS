@@ -8,8 +8,17 @@
 import UIKit
 
 final class MainTBC: UITabBarController {
+    
+    // MARK: - Properties
+    private let tabBarHeight: CGFloat = 96
+    private let tabBarWidth: CGFloat = 300
 
     // MARK: - View Life Cycle
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        setTabBarSize()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,21 +28,31 @@ final class MainTBC: UITabBarController {
 
     // MARK: - Functions
 
+    private func setTabBarSize() {
+        let safeHeight = view.safeAreaInsets.bottom
+        var tabFrame = self.tabBar.frame
+        tabFrame.size.width = tabBarWidth
+        tabFrame.size.height = tabBarHeight
+        tabFrame.origin.x = (self.view.frame.size.width - tabBarWidth) / 2
+        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight - safeHeight
+        self.tabBar.frame = tabFrame
+    }
+    
     private func setViewControllers() {
         let myPageNVC = makeNavigationController(
             unselectedImage: UIImage(named: "ic_my"),
-            selectedImage: UIImage(named: "ic_my_select"),
-            rootViewController: MyPageVC(), title: "MY")
+            selectedImage: UIImage(named: "ic_my"),
+            rootViewController: MyPageVC())
 
         let homeNVC = makeNavigationController(
             unselectedImage: UIImage(named: "ic_home"),
-            selectedImage: UIImage(named: "ic_home_select"),
-            rootViewController: HomeVC(), title: "홈")
+            selectedImage: UIImage(named: "ic_home"),
+            rootViewController: HomeVC())
 
         let basketNVC = makeNavigationController(
-            unselectedImage: UIImage(named: "ic_cart"),
-            selectedImage: UIImage(named: "ic_cart_select"),
-            rootViewController: BasketVC(), title: "장바구니")
+            unselectedImage: UIImage(named: "ic_basket"),
+            selectedImage: UIImage(named: "ic_basket"),
+            rootViewController: BasketVC())
 
         viewControllers = [myPageNVC, homeNVC, basketNVC]
     }
@@ -50,12 +69,11 @@ final class MainTBC: UITabBarController {
         tabBar.unselectedItemTintColor = .black
     }
 
-    private func makeNavigationController(unselectedImage: UIImage?, selectedImage: UIImage?, rootViewController: UIViewController, title: String) -> UINavigationController {
+    private func makeNavigationController(unselectedImage: UIImage?, selectedImage: UIImage?, rootViewController: UIViewController) -> UINavigationController {
         let nav = UINavigationController(rootViewController: rootViewController)
         
         nav.tabBarItem.image = unselectedImage
         nav.tabBarItem.selectedImage = selectedImage
-        nav.tabBarItem.title = title
         nav.isNavigationBarHidden = true
         
         return nav
