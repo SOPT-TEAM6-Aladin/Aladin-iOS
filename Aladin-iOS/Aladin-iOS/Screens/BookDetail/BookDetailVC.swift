@@ -36,15 +36,52 @@ class BookDetailVC: UIViewController {
         $0.showsVerticalScrollIndicator = true
     }
     
+    //MARK: -
+    
     // 책 상세정보 뷰
     private let bookInfoContainerView = UIView()
-    private let bookImage = ImageLiterals.Images.detailBookSample
-    private let goldStickerImage = ImageLiterals.Icons.goldSticker
-    private let bookBackImage = ImageLiterals.Icons.bookBack
-    private let bookNextImage = ImageLiterals.Icons.bookNext
-    private let bookName: () = UILabel().text = "기소영의 친구들"
-    private let bookPrize: () = UILabel().text = "제2회 사계절어린이문학상 대상 수상작"
-    private let bookWrite: () = UILabel().text = "정은주(지은이) ㅣ 해랑(그림)"
+    private let bookImage = UIImageView().then {
+        $0.image = ImageLiterals.Images.detailBookSample
+    }
+    private let goldStickerImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.goldSticker
+    }
+    private let bookBackImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.bookBack
+    }
+    private let bookNextImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.bookNext
+    }
+    private let bookName = UILabel().then{
+        $0.text = "기소영의 친구들"
+        $0.font = .systemFont(ofSize: 20, weight: .bold)
+    }
+    private let bookPrize = UILabel().then{
+        $0.text = "제2회 사계절어린이문학상 대상 수상작"
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+    }
+    private let bookWrite = UILabel().then{
+        $0.text = "정은주(지은이) ㅣ 해랑(그림)"
+        $0.textColor = UIColor.aladinGray4
+        $0.font = .systemFont(ofSize: 12, weight: .medium)
+    }
+    private let bookRatingContainerView = UIView()
+    private let bookRatingIcon = UIImageView().then {
+        $0.image = ImageLiterals.Icons.star
+    }
+    private let bookRatingLabel = UILabel().then{
+        $0.text = "4.6"
+        $0.font = .systemFont(ofSize: 12, weight: .medium)
+    }
+    private let bookHeartIcon = UIImageView().then {
+        $0.image = ImageLiterals.Icons.heart
+    }
+    private let bookHeartLabel = UILabel().then{
+        $0.text = "3,785"
+        $0.font = .systemFont(ofSize: 12, weight: .medium)
+    }
+    
+    //MARK: -
     
     // 책 가격 및 배송정보 뷰
     private let bookPriceContainerView = UIView()
@@ -82,9 +119,10 @@ extension BookDetailVC {
     //MARK: - setLayout
     
     func setLayout() {
+        
+        // addSubViews
         view.addSubviews(naviView, contentScrollView, toolBarContainerView)
         naviView.addSubviews(backBtn, searchBtn, basketBtn)
-        
         contentScrollView.addSubviews(
             bookInfoContainerView,
             bookPriceContainerView,
@@ -93,28 +131,36 @@ extension BookDetailVC {
             bookStoryContainerView,
             bookReviewContainerView
         )
+        bookInfoContainerView.addSubviews(
+            bookImage,
+            goldStickerImage,
+            bookBackImage,
+            bookNextImage,
+            bookName,
+            bookPrize,
+            bookWrite,
+            bookRatingContainerView
+        )
+        bookRatingContainerView.addSubviews(
+            bookRatingIcon,
+            bookRatingLabel,
+            bookHeartIcon,
+            bookHeartLabel
+        )
         
-        bookInfoContainerView.backgroundColor = .black
+        //MARK: - naviViewLayout
+        
+        // testColors
+        bookInfoContainerView.backgroundColor = .white
         bookPriceContainerView.backgroundColor = .gray
         bookReviewContainerView.backgroundColor = .red
         toolBarContainerView.backgroundColor = .systemYellow
         
+        // naviView 레이아웃
         naviView.snp.makeConstraints {
             $0.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(48)
         }
-        
-        toolBarContainerView.snp.makeConstraints {
-            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
-            $0.height.equalTo(64)
-        }
-        
-        contentScrollView.snp.makeConstraints {
-            $0.top.equalTo(naviView.snp.bottom)
-            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            $0.bottom.equalTo(toolBarContainerView.snp.top)
-        }
-        
         
         backBtn.snp.makeConstraints {
             $0.centerY.equalToSuperview()
@@ -134,11 +180,89 @@ extension BookDetailVC {
             $0.height.width.equalTo(24)
         }
         
+        //MARK: - bookInfoLayout
+        
         bookInfoContainerView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(423)
         }
+        
+        bookImage.snp.makeConstraints{
+            $0.centerX.equalToSuperview()
+            $0.top.equalToSuperview().offset(15)
+            $0.height.equalTo(274)
+            $0.width.equalTo(176)
+        }
+        
+        goldStickerImage.snp.makeConstraints{
+            $0.top.equalTo(bookImage.snp.top)   //근데 시뮬레이터에서 top이 동일하지 않음..
+            $0.leading.equalTo(bookImage.snp.trailing).offset(9)
+            $0.height.equalTo(46)
+        }
+        
+        bookBackImage.snp.makeConstraints{
+            $0.centerY.equalTo(bookImage)
+            $0.trailing.equalTo(bookImage.snp.leading).offset(-4)
+            $0.width.height.equalTo(32)
+        }
+        
+        bookNextImage.snp.makeConstraints{
+            $0.centerY.equalTo(bookImage)
+            $0.leading.equalTo(bookImage.snp.trailing).offset(4)
+            $0.width.height.equalTo(32)
+        }
+        
+        bookName.snp.makeConstraints{
+            $0.top.equalTo(bookImage.snp.bottom).offset(14)
+            $0.centerX.equalToSuperview()
+        }
+        
+        bookPrize.snp.makeConstraints{
+            $0.top.equalTo(bookName.snp.bottom).offset(4)
+            $0.centerX.equalTo(bookName)
+        }
+
+        bookWrite.snp.makeConstraints{
+            $0.top.equalTo(bookPrize.snp.bottom).offset(4)
+            $0.centerX.equalTo(bookPrize)
+        }
+        bookRatingContainerView.snp.makeConstraints{
+            $0.top.equalTo(bookWrite.snp.bottom).offset(21)
+            $0.centerX.equalTo(bookWrite)
+            $0.width.equalTo(104)
+            $0.height.equalTo(16)
+        }
+        bookRatingIcon.snp.makeConstraints{
+            $0.top.leading.equalToSuperview()
+            $0.height.width.equalTo(16)
+        }
+        bookRatingLabel.snp.makeConstraints{
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(bookRatingIcon.snp.trailing).offset(4)
+        }
+        bookHeartIcon.snp.makeConstraints{
+            $0.leading.equalTo(bookRatingLabel.snp.trailing).offset(12)
+            $0.height.width.equalTo(16)
+        }
+        bookHeartLabel.snp.makeConstraints{
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
+        
+        //MARK: - toolBarLayout
+        
+        toolBarContainerView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(64)
+        }
+        
+        contentScrollView.snp.makeConstraints {
+            $0.top.equalTo(naviView.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(toolBarContainerView.snp.top)
+        }
+        
         
         //bookImage  //goldStickerImage  //bookBackImage  //bookNextImage  //bookName  //bookPrize//bookWrite
         
