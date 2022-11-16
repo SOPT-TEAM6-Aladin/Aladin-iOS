@@ -12,6 +12,8 @@ import Then
 
 final class HomeVC: UITabBarController {
     
+    private let scrollView = UIScrollView()
+    
     private let searchContainerView = UIView()
     private let bannerImageView = UIImageView()
     private let categoryContainerView = UIView()
@@ -32,7 +34,9 @@ final class HomeVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.addSubviews(searchContainerView,bannerImageView,categoryContainerView,editerChoiceContainerView,hotBookContainerView,giftContainerView)
+        view.addSubviews(scrollView)
+        
+        scrollView.addSubviews(searchContainerView,bannerImageView,categoryContainerView,editerChoiceContainerView,hotBookContainerView,giftContainerView)
         
         searchContainerView.addSubviews(menuButton,barcodeButton)
         searchContainerView.backgroundColor = .yellow
@@ -40,8 +44,13 @@ final class HomeVC: UITabBarController {
         hotBookContainerView.backgroundColor = .aladinPink2
         giftContainerView.backgroundColor = .red
         
+        scrollView.snp.makeConstraints { make in
+            make.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
         searchContainerView.snp.makeConstraints { make in
-            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalToSuperview()
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(52)
         }
         
@@ -83,6 +92,7 @@ final class HomeVC: UITabBarController {
             make.top.equalTo(hotBookContainerView.snp.bottom)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(279)
+            make.bottom.equalToSuperview()
         }
         
         
