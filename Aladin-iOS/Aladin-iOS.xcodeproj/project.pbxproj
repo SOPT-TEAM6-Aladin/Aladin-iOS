@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140470FD2924AE740012FD4A /* BookDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140470FC2924AE740012FD4A /* BookDetailVC.swift */; };
 		8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9D292293FF003E08B4 /* AppDelegate.swift */; };
 		8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9F292293FF003E08B4 /* SceneDelegate.swift */; };
 		8E333AA2292293FF003E08B4 /* MainTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333AA1292293FF003E08B4 /* MainTBC.swift */; };
@@ -31,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		140470FC2924AE740012FD4A /* BookDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailVC.swift; sourceTree = "<group>"; };
 		8E333A9A292293FF003E08B4 /* Aladin-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aladin-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E333A9D292293FF003E08B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E333A9F292293FF003E08B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		140470FB2924ADCE0012FD4A /* BookDetail */ = {
+			isa = PBXGroup;
+			children = (
+				140470FC2924AE740012FD4A /* BookDetailVC.swift */,
+			);
+			path = BookDetail;
+			sourceTree = "<group>";
+		};
 		8E333A91292293FF003E08B4 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +131,7 @@
 		8E7984BD29235F8D00EDC6E3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				140470FB2924ADCE0012FD4A /* BookDetail */,
 				8E7984BF29235FB300EDC6E3 /* TabBar */,
 				8E7984C029235FBD00EDC6E3 /* MyPage */,
 				8E7984BE29235FAE00EDC6E3 /* Home */,
@@ -344,6 +355,7 @@
 				8E7984D0292368B700EDC6E3 /* HomeVC.swift in Sources */,
 				8E7984CE292368AF00EDC6E3 /* MyPageVC.swift in Sources */,
 				8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */,
+				140470FD2924AE740012FD4A /* BookDetailVC.swift in Sources */,
 				8E7984D2292368BF00EDC6E3 /* BasketVC.swift in Sources */,
 				8E4FE7B329238B3800E9F36A /* FontLiterals.swift in Sources */,
 				8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */,
