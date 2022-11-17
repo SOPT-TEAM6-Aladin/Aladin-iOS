@@ -209,7 +209,8 @@ extension BookDetailVC {
             bookIntroContainerView,
             bookIndexContainerView,
             bookStoryContainerView,
-            bookReviewContainerView
+            bookReviewContainerView,
+            aladinInfoContainerView
         )
         toolBarContainerView.addSubviews(heartToolBtn, toolDivider, giftToolBtn, basketToolBtn, buyToolBtn)
         bookInfoContainerView.addSubviews(
@@ -389,7 +390,7 @@ extension BookDetailVC {
             $0.bottom.equalTo(toolBarContainerView.snp.top)
         }
         
-        //bookImage  //goldStickerImage  //bookBackImage  //bookNextImage  //bookName  //bookPrize//bookWrite
+        //MARK: - containerViewLayout
         
         bookPriceContainerView.snp.makeConstraints{
             $0.top.equalTo(bookInfoContainerView.snp.bottom)
@@ -419,6 +420,12 @@ extension BookDetailVC {
             $0.top.equalTo(bookStoryContainerView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(593)
+        }
+        
+        aladinInfoContainerView.snp.makeConstraints {
+            $0.top.equalTo(bookReviewContainerView.snp.bottom)
+            $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(283)
             $0.bottom.equalToSuperview()
         }
         
