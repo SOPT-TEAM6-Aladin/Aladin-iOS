@@ -160,8 +160,29 @@ class BookDetailVC: UIViewController {
     // 알라딘 정보 뷰
     private let aladinInfoContainerView = UIView()
     
+    //MARK: -
+    
     // 하단 탭바 뷰
     private let toolBarContainerView = UIView()
+    private lazy var heartToolBtn = UIButton().then {
+        $0.setImage(ImageLiterals.Icons.pinkHeartCircle, for: .normal)
+    }
+    private let toolDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray3
+    }
+    private lazy var giftToolBtn = UIButton().then {
+        $0.setImage(ImageLiterals.Icons.gift, for: .normal)
+    }
+    private lazy var basketToolBtn = UIButton().then {
+        $0.setTitle("장바구니", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+    }
+    private lazy var buyToolBtn = UIButton().then {
+        $0.setTitle("구매하기", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+    }
     
     // MARK: - View Life Cycle
     
@@ -179,7 +200,7 @@ extension BookDetailVC {
     
     func setLayout() {
         
-        // addSubViews
+        //MARK: addSubViews
         view.addSubviews(naviView, contentScrollView, toolBarContainerView)
         naviView.addSubviews(backBtn, searchBtn, basketBtn)
         contentScrollView.addSubviews(
@@ -190,6 +211,7 @@ extension BookDetailVC {
             bookStoryContainerView,
             bookReviewContainerView
         )
+        toolBarContainerView.addSubviews(heartToolBtn, toolDivider, giftToolBtn, basketToolBtn, buyToolBtn)
         bookInfoContainerView.addSubviews(
             bookImage,
             goldStickerImage,
@@ -229,7 +251,7 @@ extension BookDetailVC {
         bookInfoContainerView.backgroundColor = .white
         bookPriceContainerView.backgroundColor = UIColor.aladinGray1
         bookReviewContainerView.backgroundColor = .red
-        toolBarContainerView.backgroundColor = .systemYellow
+        toolBarContainerView.backgroundColor = .white
         
         // naviView 레이아웃
         naviView.snp.makeConstraints {
@@ -331,13 +353,41 @@ extension BookDetailVC {
             $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(64)
         }
+        heartToolBtn.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(18)
+            $0.leading.equalToSuperview().inset(20)
+            $0.height.width.equalTo(32)
+        }
+        toolDivider.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(20)
+            $0.leading.equalTo(heartToolBtn.snp.trailing).offset(5)
+            $0.width.equalTo(1)
+            $0.height.equalTo(28)
+        }
+        giftToolBtn.snp.makeConstraints {
+            $0.top.equalTo(heartToolBtn)
+            $0.leading.equalTo(toolDivider.snp.trailing).offset(7)
+            $0.width.height.equalTo(32)
+        }
+        basketToolBtn.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(14)
+            $0.leading.equalTo(giftToolBtn.snp.trailing).offset(11)
+            $0.width.equalTo(120)
+            $0.height.equalTo(39)
+        }
+        buyToolBtn.snp.makeConstraints {
+            $0.top.equalTo(basketToolBtn)
+            $0.leading.equalTo(basketToolBtn.snp.trailing).offset(8)
+            $0.width.equalTo(120)
+            $0.height.equalTo(basketToolBtn)
+        }
         
+        //MARK: - scrollViewLayout
         contentScrollView.snp.makeConstraints {
             $0.top.equalTo(naviView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.bottom.equalTo(toolBarContainerView.snp.top)
         }
-        
         
         //bookImage  //goldStickerImage  //bookBackImage  //bookNextImage  //bookName  //bookPrize//bookWrite
         
