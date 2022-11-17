@@ -29,6 +29,13 @@ final class HomeVC: UITabBarController {
         $0.setImage(ImageLiterals.Icons.barcode.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
+    private let searchTextField = UITextField().then {
+        $0.borderStyle = .roundedRect
+        $0.backgroundColor = .aladinGray1
+        $0.placeholder = "‘이달의 도서’를 검색해 보세요."
+        $0.clearButtonMode = .always
+    }
+    
 
     // MARK: - View Life Cycle
     
@@ -38,12 +45,12 @@ final class HomeVC: UITabBarController {
         
         scrollView.addSubviews(searchContainerView,bannerImageView,categoryContainerView,editerChoiceContainerView,hotBookContainerView,giftContainerView)
         
-        searchContainerView.addSubviews(menuButton,barcodeButton)
-        searchContainerView.backgroundColor = .yellow
-        categoryContainerView.backgroundColor = .aladinBlue
-        hotBookContainerView.backgroundColor = .aladinPink2
-        giftContainerView.backgroundColor = .red
-        
+        searchContainerView.addSubviews(menuButton,barcodeButton,searchTextField)
+//        searchContainerView.backgroundColor = .yellow
+//        categoryContainerView.backgroundColor = .aladinBlue
+//        hotBookContainerView.backgroundColor = .aladinPink2
+//        giftContainerView.backgroundColor = .red
+//
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -60,7 +67,7 @@ final class HomeVC: UITabBarController {
         }
         
         barcodeButton.snp.makeConstraints { make in
-            make.trailing.equalToSuperview().inset(20)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.centerY.equalToSuperview()
         }
         
@@ -68,6 +75,12 @@ final class HomeVC: UITabBarController {
             make.top.equalTo(searchContainerView.snp.bottom)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(119)
+        }
+        
+        searchTextField.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+            make.width.equalToSuperview().inset(56)
+            make.height.equalTo(31)
         }
         
         categoryContainerView.snp.makeConstraints { make in
@@ -95,8 +108,8 @@ final class HomeVC: UITabBarController {
             make.bottom.equalToSuperview()
         }
         
+        bannerImageView.image = ImageLiterals.Images.banner
         
-    
     }
     
     
