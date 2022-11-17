@@ -84,7 +84,66 @@ class BookDetailVC: UIViewController {
     //MARK: -
     
     // 책 가격 및 배송정보 뷰
-    private let bookPriceContainerView = UIView()
+    private let bookPriceContainerView = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray1
+    }
+    private let originPrice = UILabel().then {
+        $0.text = "12,000원"
+        $0.textColor = UIColor.aladinGray4
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+    }
+    private let discountPrice = UILabel().then {
+        $0.text = "10,800원"
+        $0.textColor = UIColor.aladinPink2
+        $0.font = .systemFont(ofSize: 20, weight: .bold)
+    }
+    private let priceDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
+    private let deliveryLabel = UILabel().then {
+        $0.text = "배송료"
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+    }
+    private let deliveryLine = UIView().then {
+        $0.backgroundColor = UIColor.black
+    }
+    private let deliveryFee = UILabel().then {
+        $0.text = "무료"
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+    }
+    private let deliveryIcon = UIImageView().then {
+        $0.image = ImageLiterals.Icons.carpet
+    }
+    private let carpetDeliveryLabel = UILabel().then {
+        $0.text = "양탄자 배송"
+        $0.font = .systemFont(ofSize: 12, weight: .medium)
+    }
+    private let deliveryInfoLabel = UILabel().then {
+        $0.text = "내일(목) 새벽 7시 전 도착 보장"
+        $0.textColor = UIColor.aladinBlue
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+    }
+    private let deliveryDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
+    private let eBookLabel = UILabel().then {
+        $0.text = "전자책"
+        $0.font = .systemFont(ofSize: 14, weight: .medium)
+    }
+    private let eBookDetailLabel = UILabel().then {
+        $0.text = "eBook이 출간되면 알려드립니다."
+        $0.textColor = UIColor.aladinGray4
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+    }
+    private let eBookRequestBtn = UIButton().then {
+        $0.setTitle("eBook 출간 알림 신청", for: .normal)
+        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+    }
+    
+    private let priceContainerDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
     
     // 책 소개 뷰
     private let bookIntroContainerView = UIView()
@@ -147,12 +206,28 @@ extension BookDetailVC {
             bookHeartIcon,
             bookHeartLabel
         )
+        bookPriceContainerView.addSubviews(
+            originPrice,
+            discountPrice,
+            priceDivider,
+            deliveryLabel,
+            deliveryLine,
+            deliveryFee,
+            deliveryIcon,
+            carpetDeliveryLabel,
+            deliveryInfoLabel,
+            deliveryDivider,
+            eBookLabel,
+            eBookDetailLabel,
+            eBookRequestBtn,
+            priceContainerDivider
+        )
         
         //MARK: - naviViewLayout
         
         // testColors
         bookInfoContainerView.backgroundColor = .white
-        bookPriceContainerView.backgroundColor = .gray
+        bookPriceContainerView.backgroundColor = UIColor.aladinGray1
         bookReviewContainerView.backgroundColor = .red
         toolBarContainerView.backgroundColor = .systemYellow
         
@@ -295,6 +370,72 @@ extension BookDetailVC {
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(593)
             $0.bottom.equalToSuperview()
+        }
+        
+        //MARK: - BookPriceLayout
+        
+        originPrice.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(20)
+        }
+        discountPrice.snp.makeConstraints {
+            $0.top.equalTo(originPrice.snp.bottom).offset(3)
+            $0.leading.equalTo(originPrice)
+        }
+        priceDivider.snp.makeConstraints {
+            $0.top.equalTo(discountPrice.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(11)
+            $0.height.equalTo(1)
+        }
+        deliveryLabel.snp.makeConstraints {
+            $0.top.equalTo(priceDivider.snp.bottom).offset(10)
+            $0.leading.equalTo(originPrice)
+        }
+        deliveryLine.snp.makeConstraints {
+            $0.top.equalTo(priceDivider.snp.bottom).offset(13)
+            $0.leading.equalTo(deliveryLabel.snp.trailing).offset(10)
+            $0.height.equalTo(11)
+            $0.width.equalTo(1)
+        }
+        deliveryFee.snp.makeConstraints {
+            $0.top.equalTo(deliveryLabel)
+            $0.leading.equalTo(deliveryLine).offset(10)
+        }
+        deliveryIcon.snp.makeConstraints {
+            $0.top.equalTo(deliveryLabel.snp.bottom).offset(3)
+            $0.leading.equalToSuperview().offset(21)
+            $0.height.width.equalTo(46)
+        }
+        carpetDeliveryLabel.snp.makeConstraints {
+            $0.top.equalTo(deliveryLabel.snp.bottom).offset(8)
+            $0.leading.equalTo(deliveryIcon.snp.trailing).offset(8)
+        }
+        deliveryInfoLabel.snp.makeConstraints {
+            $0.top.equalTo(carpetDeliveryLabel.snp.bottom).offset(8)
+            $0.leading.equalTo(deliveryIcon.snp.trailing)
+        }
+        deliveryDivider.snp.makeConstraints {
+            $0.top.equalTo(deliveryInfoLabel.snp.bottom).offset(9)
+            $0.leading.trailing.equalToSuperview().inset(11)
+            $0.height.equalTo(1)
+        }
+        eBookLabel.snp.makeConstraints {
+            $0.top.equalTo(deliveryDivider.snp.bottom).offset(10)
+            $0.leading.equalTo(deliveryLabel)
+        }
+        eBookDetailLabel.snp.makeConstraints {
+            $0.top.equalTo(eBookLabel.snp.bottom).offset(4)
+            $0.leading.equalTo(eBookLabel)
+        }
+        eBookRequestBtn.snp.makeConstraints {
+            $0.top.equalTo(deliveryDivider.snp.bottom).offset(25)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(26)
+        }
+        priceContainerDivider.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(4)
+            $0.trailing.leading.equalToSuperview()
         }
     }
 }
