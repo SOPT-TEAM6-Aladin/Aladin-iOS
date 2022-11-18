@@ -42,10 +42,18 @@ final class HomeVC: UITabBarController {
     private let searchButton = UIButton(type: .system).then {
         $0.setImage(ImageLiterals.Icons.search.withRenderingMode(.alwaysOriginal), for: .normal)
     }
-    
+      
     private let divideLineView = UIView()
     
-    private let imageNextButton = UIButton().then {
+    private let editerChoiceImageNextButton = UIButton().then {
+        $0.setImage(ImageLiterals.Icons.bookNext, for: .normal)
+    }
+    
+    private let hotBookImageNextButton = UIButton().then {
+        $0.setImage(ImageLiterals.Icons.bookNext, for: .normal)
+    }
+    
+    private let giftImageNextButton = UIButton().then {
         $0.setImage(ImageLiterals.Icons.bookNext, for: .normal)
     }
     
@@ -58,6 +66,17 @@ final class HomeVC: UITabBarController {
         $0.font = UIFont.systemFont(ofSize: 20)
     }
     
+    private let hotBookLabel = UILabel().then {
+        $0.text = "지금, 화제의 책!"
+        $0.font = UIFont.systemFont(ofSize: 20)
+    }
+    
+    private let giftLabel = UILabel().then {
+        $0.text = "알라딘이 만든 사은품"
+        $0.font = UIFont.systemFont(ofSize: 20)
+    }
+    
+    
 
     // MARK: - View Life Cycle
     
@@ -69,9 +88,13 @@ final class HomeVC: UITabBarController {
         
         searchContainerView.addSubviews(menuButton,barcodeButton,textFieldView)
         
-        editerChoiceContainerView.addSubviews(divideLineView,imageNextButton,goldStickerImage,editerChoiceLabel)
-        
         textFieldView.addSubviews(textFieldLabel,searchButton)
+        
+        editerChoiceContainerView.addSubviews(divideLineView,editerChoiceImageNextButton,goldStickerImage,editerChoiceLabel)
+        
+        hotBookContainerView.addSubviews(hotBookLabel,hotBookImageNextButton)
+        
+        giftContainerView.addSubviews(giftLabel,giftImageNextButton)
         
         //영역 확인용 색상 넣어본것들~
 //        searchContainerView.backgroundColor = .yellow
@@ -144,21 +167,21 @@ final class HomeVC: UITabBarController {
             make.height.equalTo(330)
         }
         
-        imageNextButton.snp.makeConstraints { make in
+        editerChoiceImageNextButton.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(20)
             make.top.equalTo(divideLineView.snp.bottom).offset(28)
             make.width.height.equalTo(32)
         }
         
         goldStickerImage.snp.makeConstraints { make in
-            make.centerY.equalTo(imageNextButton)
+            make.centerY.equalTo(editerChoiceImageNextButton)
             make.leading.equalToSuperview().offset(20)
             make.width.equalTo(10)
             make.height.equalTo(16)
         }
         
         editerChoiceLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(imageNextButton)
+            make.centerY.equalTo(editerChoiceImageNextButton)
             make.leading.equalTo(goldStickerImage.snp.trailing).offset(8)
         }
         
@@ -168,11 +191,33 @@ final class HomeVC: UITabBarController {
             make.height.equalTo(343)
         }
         
+        hotBookLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(hotBookImageNextButton)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        hotBookImageNextButton.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview().inset(20)
+            make.width.height.equalTo(32)
+        }
+        
         giftContainerView.snp.makeConstraints { make in
             make.top.equalTo(hotBookContainerView.snp.bottom)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(279)
             make.bottom.equalToSuperview()
+        }
+        
+        giftLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(giftImageNextButton)
+            make.leading.equalToSuperview().offset(20)
+        }
+        
+        giftImageNextButton.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.trailing.equalToSuperview().inset(20)
+            make.width.height.equalTo(32)
         }
         
         bannerImageView.image = ImageLiterals.Images.banner
