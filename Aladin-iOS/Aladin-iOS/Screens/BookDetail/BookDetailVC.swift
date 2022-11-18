@@ -171,8 +171,31 @@ class BookDetailVC: UIViewController {
         $0.backgroundColor = UIColor.aladinGray2
     }
     
+    //MARK: -
+    
     // 책 목차 뷰
     private let bookIndexContainerView = UIView()
+    private let bookIndexLabel = UILabel().then {
+        $0.text = "목차"
+        $0.font = .systemFont(ofSize: 20, weight: .regular)
+        //$0.font = UIFont.font(.pretendardRegular, ofSize: 20)
+    }
+    private let bookIndexDetail = UILabel().then {
+        $0.text = "1. 일요일 밤의 비보 _5 \n2. 빈자리 _22 \n3. 기소영 그룹의 재결합 _32"
+        $0.numberOfLines = 3
+        $0.font = .systemFont(ofSize: 14, weight: .regular)
+    }
+    private let bookIndexDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
+    private let bookIndexDetailMore = UILabel().then {
+        $0.text = "더보기"
+        $0.textColor = UIColor.aladinGray3
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+    }
+    private let bookIndexContainerDivier = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
     
     // 책 줄거리 뷰
     private let bookStoryContainerView = UIView()
@@ -544,6 +567,31 @@ extension BookDetailVC {
             $0.centerX.equalToSuperview()
         }
         bookIntroContainerDivier.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(4)
+            $0.trailing.leading.equalToSuperview()
+        }
+        
+        //MARK: - bookIndexLayout
+        
+        bookIndexLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(32)
+            $0.leading.equalTo(bookIndexDetail)
+        }
+        bookIndexDetail.snp.makeConstraints {
+            $0.top.equalTo(bookIndexLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(22.5)
+        }
+        bookIndexDivider.snp.makeConstraints {
+            $0.top.equalTo(bookIndexDetail.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview().inset(11)
+            $0.height.equalTo(1)
+        }
+        bookIndexDetailMore.snp.makeConstraints {
+            $0.top.equalTo(bookIndexDivider.snp.bottom).offset(18)
+            $0.centerX.equalToSuperview()
+        }
+        bookIndexContainerDivier.snp.makeConstraints {
             $0.bottom.equalToSuperview()
             $0.height.equalTo(4)
             $0.trailing.leading.equalToSuperview()
