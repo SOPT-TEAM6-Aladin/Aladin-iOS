@@ -145,8 +145,31 @@ class BookDetailVC: UIViewController {
         $0.backgroundColor = UIColor.aladinGray2
     }
     
+    // MARK: -
+    
     // 책 소개 뷰
     private let bookIntroContainerView = UIView()
+    private let bookIntroLabel = UILabel().then {
+        $0.text = "책소개"
+        $0.font = .systemFont(ofSize: 20, weight: .regular)
+        //$0.font = UIFont.font(.pretendardRegular, ofSize: 20)
+    }
+    private let bookIntroDetail = UILabel().then {
+        $0.text = "제2회 사계절어린이문학상 대상 수상작. 한 어린이의 죽음으로 시작하는 이야기지만, 결코 어둡거나 무겁지 않다. 이야기를 이끄는 어린이들이 그 슬픔에 머물..."
+        $0.numberOfLines = 3
+        $0.font = .systemFont(ofSize: 14, weight: .regular)
+    }
+    private let bookIntroDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
+    private let bookIntroDetailMore = UILabel().then {
+        $0.text = "더보기"
+        $0.textColor = UIColor.aladinGray3
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+    }
+    private let bookIntroContainerDivier = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
     
     // 책 목차 뷰
     private let bookIndexContainerView = UIView()
@@ -245,7 +268,13 @@ extension BookDetailVC {
             eBookRequestBtn,
             priceContainerDivider
         )
-        
+        bookIntroContainerView.addSubviews(
+            bookIntroLabel,
+            bookIntroDetail,
+            bookIntroDivider,
+            bookIntroDetailMore,
+            bookIntroContainerDivier
+        )
         //MARK: - naviViewLayout
         
         // testColors
@@ -494,5 +523,31 @@ extension BookDetailVC {
             $0.height.equalTo(4)
             $0.trailing.leading.equalToSuperview()
         }
+        
+        //MARK: - bookIntroLayout
+        
+        bookIntroLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(32)
+            $0.leading.equalTo(bookIntroDetail)
+        }
+        bookIntroDetail.snp.makeConstraints {
+            $0.top.equalTo(bookIntroLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(22.5)
+        }
+        bookIntroDivider.snp.makeConstraints {
+            $0.top.equalTo(bookIntroDetail.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview().inset(11)
+            $0.height.equalTo(1)
+        }
+        bookIntroDetailMore.snp.makeConstraints {
+            $0.top.equalTo(bookIntroDivider.snp.bottom).offset(15)
+            $0.centerX.equalToSuperview()
+        }
+        bookIntroContainerDivier.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(4)
+            $0.trailing.leading.equalToSuperview()
+        }
+        
     }
 }
