@@ -43,6 +43,20 @@ final class HomeVC: UITabBarController {
         $0.setImage(ImageLiterals.Icons.search.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
+    private let divideLineView = UIView()
+    
+    private let imageNextButton = UIButton().then {
+        $0.setImage(ImageLiterals.Icons.bookNext, for: .normal)
+    }
+    
+    private let goldStickerImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.goldSticker
+    }
+    
+    private let editerChoiceLabel = UILabel().then {
+        $0.text = "편집장의 선택"
+        $0.font = UIFont.systemFont(ofSize: 20)
+    }
     
 
     // MARK: - View Life Cycle
@@ -55,6 +69,8 @@ final class HomeVC: UITabBarController {
         
         searchContainerView.addSubviews(menuButton,barcodeButton,textFieldView)
         
+        editerChoiceContainerView.addSubviews(divideLineView,imageNextButton,goldStickerImage,editerChoiceLabel)
+        
         textFieldView.addSubviews(textFieldLabel,searchButton)
         
         //영역 확인용 색상 넣어본것들~
@@ -63,7 +79,9 @@ final class HomeVC: UITabBarController {
 //        hotBookContainerView.backgroundColor = .aladinPink2
 //        giftContainerView.backgroundColor = .red
 //
+        
         textFieldView.backgroundColor = .aladinGray1
+        divideLineView.backgroundColor = .aladinGray1
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -114,10 +132,34 @@ final class HomeVC: UITabBarController {
             make.height.equalTo(209)
         }
         
+        divideLineView.snp.makeConstraints { make in
+            make.top.equalTo(categoryContainerView.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(4)
+        }
+        
         editerChoiceContainerView.snp.makeConstraints { make in
             make.top.equalTo(categoryContainerView.snp.bottom)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(330)
+        }
+        
+        imageNextButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().inset(20)
+            make.top.equalTo(divideLineView.snp.bottom).offset(28)
+            make.width.height.equalTo(32)
+        }
+        
+        goldStickerImage.snp.makeConstraints { make in
+            make.centerY.equalTo(imageNextButton)
+            make.leading.equalToSuperview().offset(20)
+            make.width.equalTo(10)
+            make.height.equalTo(16)
+        }
+        
+        editerChoiceLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(imageNextButton)
+            make.leading.equalTo(goldStickerImage.snp.trailing).offset(8)
         }
         
         hotBookContainerView.snp.makeConstraints { make in
