@@ -29,12 +29,20 @@ final class HomeVC: UITabBarController {
         $0.setImage(ImageLiterals.Icons.barcode.withRenderingMode(.alwaysOriginal), for: .normal)
     }
     
-    private let searchTextField = UITextField().then {
-        $0.borderStyle = .roundedRect
-        $0.backgroundColor = .aladinGray1
-        $0.placeholder = "‘이달의 도서’를 검색해 보세요."
-        $0.clearButtonMode = .always
+    private let textFieldView = UIView().then {
+        $0.layer.cornerRadius = 12
     }
+    
+    private let textFieldLabel = UILabel().then {
+        $0.text = "'이달의 도서'를 검색해 보세요."
+        $0.textColor = .aladinGray3
+        $0.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private let searchButton = UIButton(type: .system).then {
+        $0.setImage(ImageLiterals.Icons.search.withRenderingMode(.alwaysOriginal), for: .normal)
+    }
+    
     
 
     // MARK: - View Life Cycle
@@ -45,12 +53,18 @@ final class HomeVC: UITabBarController {
         
         scrollView.addSubviews(searchContainerView,bannerImageView,categoryContainerView,editerChoiceContainerView,hotBookContainerView,giftContainerView)
         
-        searchContainerView.addSubviews(menuButton,barcodeButton,searchTextField)
+        searchContainerView.addSubviews(menuButton,barcodeButton,textFieldView)
+        
+        textFieldView.addSubviews(textFieldLabel,searchButton)
+        
+        //영역 확인용 색상 넣어본것들~
 //        searchContainerView.backgroundColor = .yellow
 //        categoryContainerView.backgroundColor = .aladinBlue
 //        hotBookContainerView.backgroundColor = .aladinPink2
 //        giftContainerView.backgroundColor = .red
 //
+        textFieldView.backgroundColor = .aladinGray1
+        
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -77,10 +91,21 @@ final class HomeVC: UITabBarController {
             make.height.equalTo(119)
         }
         
-        searchTextField.snp.makeConstraints { make in
+        textFieldView.snp.makeConstraints { make in
             make.centerX.centerY.equalToSuperview()
             make.width.equalToSuperview().inset(56)
             make.height.equalTo(31)
+        }
+        
+        textFieldLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(14)
+        }
+        
+        searchButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(12)
+            make.width.height.equalTo(18)
         }
         
         categoryContainerView.snp.makeConstraints { make in
