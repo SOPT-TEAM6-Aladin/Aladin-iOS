@@ -319,6 +319,13 @@ extension BookDetailVC {
             bookIntroDetailMore,
             bookIntroContainerDivier
         )
+        bookIndexContainerView.addSubviews(
+            bookIndexLabel,
+            bookIndexDetail,
+            bookIndexDivider,
+            bookIndexDetailMore,
+            bookIndexContainerDivier
+        )
         bookStoryContainerView.addSubviews(
             bookStoryLabel,
             bookStoryDetail,
