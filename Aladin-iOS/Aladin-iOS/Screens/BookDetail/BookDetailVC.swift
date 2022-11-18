@@ -199,6 +199,27 @@ class BookDetailVC: UIViewController {
     
     // 책 줄거리 뷰
     private let bookStoryContainerView = UIView()
+    private let bookStoryLabel = UILabel().then {
+        $0.text = "줄거리"
+        $0.font = .systemFont(ofSize: 20, weight: .regular)
+        //$0.font = UIFont.font(.pretendardRegular, ofSize: 20)
+    }
+    private let bookStoryDetail = UILabel().then {
+        $0.text = "같은 반 친구이자 가장 친한 그룹의 한 친구인 ‘기소영’이 교통사고로 세상을 떠났다. 엄마도, 선생님도 그렇게 만해 주었다. 하지만 채린이는 혼란스럽다. 왜 눈물이 나지 않는 것일까? 우리는 친한 사이가 아니었던 걸까? 소영이는 나에게 어떤 친구 ..."
+        $0.numberOfLines = 5
+        $0.font = .systemFont(ofSize: 14, weight: .regular)
+    }
+    private let bookStoryDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
+    private let bookStoryDetailMore = UILabel().then {
+        $0.text = "더보기"
+        $0.textColor = UIColor.aladinGray3
+        $0.font = .systemFont(ofSize: 12, weight: .regular)
+    }
+    private let bookStoryContainerDivier = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
     
     // 책 한 줄 리뷰 뷰
     private let bookReviewContainerView = UIView()
@@ -297,6 +318,13 @@ extension BookDetailVC {
             bookIntroDivider,
             bookIntroDetailMore,
             bookIntroContainerDivier
+        )
+        bookStoryContainerView.addSubviews(
+            bookStoryLabel,
+            bookStoryDetail,
+            bookStoryDivider,
+            bookStoryDetailMore,
+            bookStoryContainerDivier
         )
         //MARK: - naviViewLayout
         
@@ -597,5 +625,29 @@ extension BookDetailVC {
             $0.trailing.leading.equalToSuperview()
         }
         
+        //MARK: - bookStoryLayout
+        
+        bookStoryLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(38)
+            $0.leading.equalTo(bookIndexDetail)
+        }
+        bookStoryDetail.snp.makeConstraints {
+            $0.top.equalTo(bookStoryLabel.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(22.5)
+        }
+        bookStoryDivider.snp.makeConstraints {
+            $0.top.equalTo(bookStoryDetail.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview().inset(11)
+            $0.height.equalTo(1)
+        }
+        bookStoryDetailMore.snp.makeConstraints {
+            $0.top.equalTo(bookStoryDivider.snp.bottom).offset(18)
+            $0.centerX.equalToSuperview()
+        }
+        bookStoryContainerDivier.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(4)
+            $0.trailing.leading.equalToSuperview()
+        }
     }
 }
