@@ -17,7 +17,7 @@ final class HomeVC: UITabBarController {
     private let searchContainerView = UIView()
     private let bannerImageView = UIImageView()
     private let categoryContainerView = UIView()
-    private let editerChoiceContainerView = UIView()
+    private var editerChoiceContainerView =  EditerChoiceContainerView()
     private let hotBookContainerView = UIView()
     private let giftContainerView = UIView()
     
@@ -42,7 +42,7 @@ final class HomeVC: UITabBarController {
     private let searchButton = UIButton(type: .system).then {
         $0.setImage(ImageLiterals.Icons.search.withRenderingMode(.alwaysOriginal), for: .normal)
     }
-      
+    
     private let divideLineView = UIView()
     
     private let editerChoiceImageNextButton = UIButton().then {

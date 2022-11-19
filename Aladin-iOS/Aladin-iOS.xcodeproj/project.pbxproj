@@ -28,6 +28,8 @@
 		8E7984E22923815C00EDC6E3 /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7984E12923815C00EDC6E3 /* Then */; };
 		8E7984E52923816A00EDC6E3 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7984E42923816A00EDC6E3 /* SnapKit */; };
 		8E7984E82923818900EDC6E3 /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 8E7984E72923818900EDC6E3 /* Moya */; };
+		A305F3602927999200FDF5DD /* EditerChoiceContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A305F35F2927999200FDF5DD /* EditerChoiceContainerView.swift */; };
+		A305F36229279E8700FDF5DD /* BookCVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A305F36129279E8700FDF5DD /* BookCVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,6 +53,8 @@
 		8E7984D82923788500EDC6E3 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
 		8E7984DC29237E5200EDC6E3 /* ColorLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorLiterals.swift; sourceTree = "<group>"; };
 		8E7984DE29237FB100EDC6E3 /* ImageLiterals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLiterals.swift; sourceTree = "<group>"; };
+		A305F35F2927999200FDF5DD /* EditerChoiceContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditerChoiceContainerView.swift; sourceTree = "<group>"; };
+		A305F36129279E8700FDF5DD /* BookCVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookCVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 			isa = PBXGroup;
 			children = (
 				8E7984CF292368B700EDC6E3 /* HomeVC.swift */,
+				A305F35F2927999200FDF5DD /* EditerChoiceContainerView.swift */,
+				A305F36129279E8700FDF5DD /* BookCVC.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -340,7 +346,9 @@
 				8E333AA2292293FF003E08B4 /* MainTBC.swift in Sources */,
 				8E4FE7AF2923822500E9F36A /* addSubviews.swift in Sources */,
 				8E7984DF29237FB100EDC6E3 /* ImageLiterals.swift in Sources */,
+				A305F3602927999200FDF5DD /* EditerChoiceContainerView.swift in Sources */,
 				8E7984DD29237E5300EDC6E3 /* ColorLiterals.swift in Sources */,
+				A305F36229279E8700FDF5DD /* BookCVC.swift in Sources */,
 				8E7984D0292368B700EDC6E3 /* HomeVC.swift in Sources */,
 				8E7984CE292368AF00EDC6E3 /* MyPageVC.swift in Sources */,
 				8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */,
