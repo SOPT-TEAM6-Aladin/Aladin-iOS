@@ -23,8 +23,9 @@ class BookCVC: UICollectionViewCell {
         
         
         contentView.backgroundColor = .clear
-        editerChoiceImageView.contentMode = .scaleAspectFill
+        editerChoiceImageView.contentMode = .scaleToFill
         setLayout()
+        editerChoiceImageView.layer.cornerRadius = 12
         
     }
     
@@ -40,7 +41,9 @@ class BookCVC: UICollectionViewCell {
         contentView.addSubview(editerChoiceImageView)
         
         editerChoiceImageView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.top.equalToSuperview()
+            make.leading.trailing.equalToSuperview().offset(20)
+            make.bottom.equalToSuperview()
         }
     }
     

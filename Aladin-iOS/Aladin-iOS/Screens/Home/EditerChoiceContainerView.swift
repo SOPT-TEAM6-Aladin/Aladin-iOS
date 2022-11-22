@@ -36,6 +36,7 @@ class EditerChoiceContainerView: UIView {
         editerChoiceCV.register(BookCVC.self, forCellWithReuseIdentifier: "1")
         editerChoiceCV.delegate = self
         editerChoiceCV.dataSource = self
+        editerChoiceCV.showsHorizontalScrollIndicator = false
     }
     
     private func setLayout(){
