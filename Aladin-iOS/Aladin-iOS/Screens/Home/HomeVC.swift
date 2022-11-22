@@ -206,6 +206,9 @@ final class HomeVC: UITabBarController {
         $0.font = UIFont.systemFont(ofSize: 20)
     }
     
+    private let bottomBookImage = UIImageView().then {
+        $0.image = ImageLiterals.Images.bottomBook
+    }
     
 
     // MARK: - View Life Cycle
@@ -236,7 +239,7 @@ final class HomeVC: UITabBarController {
         
         hotBookContainerView.addSubviews(hotBookLabel,hotBookImageNextButton)
         
-        giftContainerView.addSubviews(giftLabel,giftImageNextButton)
+        giftContainerView.addSubviews(giftLabel,giftImageNextButton,bottomBookImage)
         
         //영역 확인용 색상 넣어본것들
 //        searchContainerView.backgroundColor = .yellow
@@ -517,6 +520,11 @@ final class HomeVC: UITabBarController {
             make.top.equalToSuperview()
             make.trailing.equalToSuperview().inset(20)
             make.width.height.equalTo(32)
+        }
+        
+        bottomBookImage.snp.makeConstraints { make in
+            make.top.equalTo(giftImageNextButton.snp.bottom).offset(16)
+            make.centerX.equalToSuperview()
         }
     }
 }
