@@ -20,7 +20,7 @@ final class HomeVC: UITabBarController {
     }
     private let categoryContainerView = UIView()
     private var editerChoiceContainerView =  EditerChoiceContainerView()
-    private let hotBookContainerView = UIView()
+    private let hotBookContainerView = HotBookContainerView()
     private let giftContainerView = UIView()
     
     private let menuButton = UIButton(type: .system).then {

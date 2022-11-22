@@ -13,14 +13,14 @@ class EditerChoiceContainerView: UIView {
     private var editerChoiceCV: UICollectionView = {
        let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 234, height: 204)
+        layout.itemSize = CGSize(width: 217, height: 204)
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         return cv
     }()
     
-    var imageData = [
+    private var imageData = [
                     UIImage(named: "book1"),
                     UIImage(named: "book2"),
                     UIImage(named: "book3")
@@ -31,7 +31,8 @@ class EditerChoiceContainerView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-            editerChoiceCV.backgroundColor = .clear
+        
+        editerChoiceCV.backgroundColor = .clear
         setLayout()
         editerChoiceCV.register(BookCVC.self, forCellWithReuseIdentifier: "1")
         editerChoiceCV.delegate = self
@@ -55,6 +56,7 @@ class EditerChoiceContainerView: UIView {
     }
     
 }
+
 extension EditerChoiceContainerView: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3

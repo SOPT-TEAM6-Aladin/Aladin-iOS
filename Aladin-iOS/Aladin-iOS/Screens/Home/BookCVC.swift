@@ -15,7 +15,6 @@ class BookCVC: UICollectionViewCell {
     
     
     
-    
     // MARK: - Life Cycles
     
     override init(frame: CGRect) {
