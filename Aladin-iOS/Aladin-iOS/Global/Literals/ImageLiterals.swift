@@ -29,6 +29,9 @@ enum ImageLiterals {
         static var bottomBook: UIImage { .load(named: "bottomBook") }
         
         static var detailBookSample: UIImage { .load(named: "detailBookSample") }
+        
+        static var aladinLogo: UIImage { .load(named: "AppIcon") }
+        static var aladinLogoLetter: UIImage { .load(named: "logo_letter") }
     }
     
     struct Icons {
