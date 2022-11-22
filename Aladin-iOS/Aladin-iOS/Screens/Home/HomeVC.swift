@@ -77,6 +77,102 @@ final class HomeVC: UITabBarController {
         $0.image = ImageLiterals.Icons.bookforeign
     }
     
+    private let eBookStackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 12
+    }
+    
+    private let eBookLabel = UILabel().then {
+        $0.text = "e Book"
+        $0.textColor = .aladinGray6
+        $0.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private let eBookImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.ebook
+    }
+    
+    private let goodsStackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 14
+    }
+    
+    private let goodsLabel = UILabel().then {
+        $0.text = "알라딘 굿즈"
+        $0.textColor = .aladinGray6
+        $0.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private let goodsImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.goods
+    }
+    
+    private let newStackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 15
+    }
+    
+    private let newLabel = UILabel().then {
+        $0.text = "신간도서"
+        $0.textColor = .aladinGray6
+        $0.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private let newImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.new
+    }
+    
+    private let bestStackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 17
+    }
+    
+    private let bestLabel = UILabel().then {
+        $0.text = "베스트"
+        $0.textColor = .aladinGray6
+        $0.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private let bestImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.best
+    }
+    
+    private let eventStackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 15
+    }
+    
+    private let eventLabel = UILabel().then {
+        $0.text = "이벤트"
+        $0.textColor = .aladinGray6
+        $0.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private let eventImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.event
+    }
+    
+    private let categoryStackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .vertical
+        $0.spacing = 17
+    }
+    
+    private let categoryLabel = UILabel().then {
+        $0.text = "분야찾기"
+        $0.textColor = .aladinGray6
+        $0.font = UIFont.systemFont(ofSize: 12)
+    }
+    
+    private let categoryImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.category
+    }
+    
     private let divideLineView = UIView()
     
     private let editerChoiceImageNextButton = UIButton().then {
@@ -124,9 +220,17 @@ final class HomeVC: UITabBarController {
         
         textFieldView.addSubviews(textFieldLabel,searchButton)
         
-        categoryContainerView.addSubviews(korBookStackView,foreignBookStackView)
+        categoryContainerView.addSubviews(korBookStackView,foreignBookStackView,eBookStackView,goodsStackView,newStackView,bestStackView,eventStackView,categoryStackView)
+        
         korBookStackView.addSubviews(korBookImage,korBookLabel)
         foreignBookStackView.addSubviews(foreignBookImage,foreignBookLabel)
+        eBookStackView.addSubviews(eBookImage,eBookLabel)
+        goodsStackView.addSubviews(goodsImage,goodsLabel)
+        newStackView.addSubviews(newImage,newLabel)
+        bestStackView.addSubviews(bestImage,bestLabel)
+        eventStackView.addSubviews(eventImage,eventLabel)
+        categoryStackView.addSubviews(categoryImage,categoryLabel)
+
         
         editerChoiceContainerView.addSubviews(divideLineView,editerChoiceImageNextButton,goldStickerImage,editerChoiceLabel)
         
@@ -201,8 +305,8 @@ final class HomeVC: UITabBarController {
         
         korBookStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(34)
-            make.leading.equalToSuperview().offset(32)
-            make.width.equalTo(52)
+            make.centerX.equalTo(categoryContainerView.snp.leading).offset(70)
+            make.width.equalTo(42)
             make.bottom.equalToSuperview().inset(123)
         }
         
@@ -219,8 +323,8 @@ final class HomeVC: UITabBarController {
         
         foreignBookStackView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(34)
-            make.leading.equalToSuperview().offset(128)
-            make.width.equalTo(52)
+            make.centerX.equalTo(categoryContainerView.snp.leading).offset(154)
+            make.width.equalTo(42)
             make.bottom.equalToSuperview().inset(123)
         }
         
@@ -235,7 +339,113 @@ final class HomeVC: UITabBarController {
             make.centerX.equalToSuperview()
         }
         
+        eBookStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(32)
+            make.centerX.equalTo(categoryContainerView.snp.leading).offset(238)
+            make.width.equalTo(38)
+            make.bottom.equalToSuperview().inset(123)
+        }
         
+        eBookImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(28)
+        }
+        
+        eBookLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        goodsStackView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(32)
+            make.centerX.equalTo(categoryContainerView.snp.leading).offset(323)
+            make.width.equalTo(55)
+            make.bottom.equalToSuperview().inset(123)
+        }
+        
+        goodsImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(24)
+        }
+        
+        goodsLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        newStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(korBookStackView)
+            make.width.equalTo(42)
+            make.top.equalToSuperview().offset(118)
+            make.bottom.equalToSuperview().inset(32)
+        }
+        
+        newImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(30)
+        }
+        
+        newLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        bestStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(foreignBookStackView)
+            make.width.equalTo(32)
+            make.top.equalToSuperview().offset(118)
+            make.bottom.equalToSuperview().inset(32)
+        }
+        
+        bestImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(28)
+        }
+        
+        bestLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        eventStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(eBookStackView)
+            make.width.equalTo(32)
+            make.top.equalToSuperview().offset(118)
+            make.bottom.equalToSuperview().inset(32)
+        }
+        
+        eventImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(30)
+        }
+        
+        eventLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+        
+        categoryStackView.snp.makeConstraints { make in
+            make.centerX.equalTo(goodsStackView)
+            make.width.equalTo(42)
+            make.top.equalToSuperview().offset(118)
+            make.bottom.equalToSuperview().inset(32)
+        }
+        
+        categoryImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(28)
+        }
+        
+        categoryLabel.snp.makeConstraints { make in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
         // MARK: - 편집장의 선택 Layout
 
         
