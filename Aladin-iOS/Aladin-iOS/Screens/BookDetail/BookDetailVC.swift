@@ -42,6 +42,7 @@ class BookDetailVC: UIViewController {
     private let bookInfoContainerView = UIView()
     private let bookImage = UIImageView().then {
         $0.image = ImageLiterals.Images.detailBookSample
+        $0.contentMode = .scaleAspectFill
     }
     private let goldStickerImage = UIImageView().then {
         $0.image = ImageLiterals.Icons.goldSticker
@@ -223,7 +224,78 @@ class BookDetailVC: UIViewController {
     
     // 책 한 줄 리뷰 뷰
     private let bookReviewContainerView = UIView()
+    private let reviewLabel = UILabel().then {
+        $0.text = "한 줄 리뷰"
+        $0.font = .systemFont(ofSize: 20, weight: .semibold)
+    }
+    private let reviewNumber = UILabel().then {
+        $0.text = "122"
+        $0.textColor = UIColor.aladinBlue
+        $0.font = .systemFont(ofSize: 20, weight: .semibold)
+    }
+    private let reviewContainer = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+        $0.layer.cornerRadius = 5
+    }
+    private let reviewRatingContainer = UIView()
+    private let reviewRating = UILabel().then {
+        $0.text = "4.6"
+        $0.textColor = UIColor.aladinBlue
+        $0.font = .systemFont(ofSize: 28, weight: .bold)
+    }
+    private let reviewTotalRating = UILabel().then {
+        $0.text = "/ 5.0"
+        $0.textColor = UIColor.aladinGray6
+        $0.font = .systemFont(ofSize: 16, weight: .medium)
+    }
+    private let starStackView = UIStackView().then {
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .equalSpacing
+        $0.spacing = 4
+    }
+    private let fullStarIcon1 = UIImageView().then {
+        $0.image = ImageLiterals.Icons.star
+    }
+    private let fullStarIcon2 = UIImageView().then {
+        $0.image = ImageLiterals.Icons.star
+    }
+    private let fullStarIcon3 = UIImageView().then {
+        $0.image = ImageLiterals.Icons.star
+    }
+    private let fullStarIcon4 = UIImageView().then {
+        $0.image = ImageLiterals.Icons.star
+    }
+    private let halfStarIcon = UIImageView().then {
+        $0.image = ImageLiterals.Icons.halfStar
+    }
+    private let reviewDetail = UILabel().then {
+        $0.text = "80%의 구매자가 \n“추천해요”라고 응답했어요"
+        $0.textAlignment = .center
+        $0.numberOfLines = 2
+        $0.textColor = UIColor.aladinGray6
+        $0.font = .systemFont(ofSize: 14, weight: .regular)
+    }
     
+    private let reviewButton = UIButton().then {
+        $0.setTitle("리뷰 등록하기", for: .normal)
+        $0.tintColor = .white
+        $0.backgroundColor = .aladinBlue
+        $0.layer.cornerRadius = 5
+    }
+    private let reviewRatingContainerDivier = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
+    private lazy var reviewTableView = UITableView().then {
+        $0.backgroundColor = .clear
+        $0.separatorStyle = .none
+        $0.dataSource = self
+        $0.delegate = self
+    }
+    private let reviewContainerDivider = UIView().then {
+        $0.backgroundColor = UIColor.aladinGray2
+    }
     // 알라딘 정보 뷰
     private let aladinInfoContainerView = UIView()
     
@@ -256,12 +328,21 @@ class BookDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
+        register()
     }
 }
 
 //MARK: - Extension
 
 extension BookDetailVC {
+    
+    //MARK: - register
+    
+    private func register() {
+        reviewTableView.register(BookReviewTableViewCell.self,
+                                 forCellReuseIdentifier: BookReviewTableViewCell.identifier
+        )
+    }
     
     //MARK: - setLayout
     
@@ -333,12 +414,37 @@ extension BookDetailVC {
             bookStoryDetailMore,
             bookStoryContainerDivier
         )
+        bookReviewContainerView.addSubviews(
+            reviewLabel,
+            reviewNumber,
+            reviewContainer,
+            reviewButton,
+            reviewRatingContainerDivier,
+            reviewTableView,
+            reviewContainerDivider
+        )
+        reviewContainer.addSubviews(
+            reviewRatingContainer,
+            starStackView,
+            reviewDetail
+        )
+        reviewRatingContainer.addSubviews(
+            reviewRating,
+            reviewTotalRating
+        )
+        starStackView.addSubviews(
+            fullStarIcon1,
+            fullStarIcon2,
+            fullStarIcon3,
+            fullStarIcon4,
+            halfStarIcon
+        )
         //MARK: - naviViewLayout
         
         // testColors
         bookInfoContainerView.backgroundColor = .white
         bookPriceContainerView.backgroundColor = UIColor.aladinGray1
-        bookReviewContainerView.backgroundColor = .red
+        bookReviewContainerView.backgroundColor = .white
         toolBarContainerView.backgroundColor = .white
         
         // naviView 레이아웃
@@ -376,8 +482,6 @@ extension BookDetailVC {
         bookImage.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(15)
-            $0.height.equalTo(274)
-            $0.width.equalTo(176)
         }
         
         goldStickerImage.snp.makeConstraints{
@@ -656,5 +760,109 @@ extension BookDetailVC {
             $0.height.equalTo(4)
             $0.trailing.leading.equalToSuperview()
         }
+        
+        //MARK: - bookReviewLayout
+        reviewLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(41)
+            $0.leading.equalToSuperview().offset(20)
+        }
+        reviewNumber.snp.makeConstraints {
+            $0.top.equalTo(reviewLabel)
+            $0.leading.equalTo(reviewLabel.snp.trailing).offset(4)
+        }
+        reviewContainer.snp.makeConstraints {
+            $0.top.equalTo(reviewNumber.snp.bottom).offset(12)
+            $0.leading.trailing.equalToSuperview().inset(22)
+            $0.height.equalTo(155)
+        }
+        reviewRatingContainer.backgroundColor = .red
+        reviewRatingContainer.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(26)
+            $0.centerX.equalToSuperview()
+            $0.width.equalTo(82)
+        }
+        reviewRating.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
+        }
+        reviewTotalRating.snp.makeConstraints {
+            $0.bottom.equalTo(reviewRating)
+            $0.trailing.equalToSuperview()
+        }
+        starStackView.snp.makeConstraints {
+            $0.top.equalTo(reviewRating.snp.bottom)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(24)
+            $0.width.equalTo(136)
+        }
+        fullStarIcon1.snp.makeConstraints {
+            $0.top.leading.bottom.equalToSuperview()
+            $0.height.width.equalTo(24)
+        }
+        fullStarIcon2.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(fullStarIcon1.snp.trailing).offset(4)
+            $0.width.equalTo(24)
+        }
+        fullStarIcon3.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(fullStarIcon2.snp.trailing).offset(4)
+            $0.width.equalTo(24)
+        }
+        fullStarIcon4.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(fullStarIcon3.snp.trailing).offset(4)
+            $0.width.equalTo(24)
+        }
+        halfStarIcon.snp.makeConstraints {
+            $0.top.bottom.equalToSuperview()
+            $0.leading.equalTo(fullStarIcon4.snp.trailing).offset(4)
+            $0.width.equalTo(24)
+        }
+        reviewDetail.snp.makeConstraints {
+            $0.top.equalTo(starStackView.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+        }
+        reviewButton.snp.makeConstraints {
+            $0.top.equalTo(reviewContainer.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview().inset(5)
+            $0.height.equalTo(37)
+        }
+        reviewRatingContainerDivier.snp.makeConstraints {
+            $0.top.equalTo(reviewButton.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview().inset(11)
+            $0.height.equalTo(1)
+        }
+        reviewTableView.snp.makeConstraints {
+            $0.top.equalTo(reviewRatingContainerDivier.snp.bottom).offset(15)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(282)
+        }
+        reviewContainerDivider.snp.makeConstraints {
+            $0.bottom.equalToSuperview()
+            $0.height.equalTo(4)
+            $0.trailing.leading.equalToSuperview()
+        }
+    }
+}
+
+//MARK: - ReviewTableView Delegate
+extension BookDetailVC : UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return reviewDummy.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: BookReviewTableViewCell.identifier, for: indexPath) as? BookReviewTableViewCell else { return UITableViewCell() }
+        
+        reviewCell.dataBind(model: reviewDummy[indexPath.row])
+        return reviewCell
+    }
+}
+
+extension BookDetailVC : UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 87
     }
 }
