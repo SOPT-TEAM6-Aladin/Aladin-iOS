@@ -297,7 +297,66 @@ class BookDetailVC: UIViewController {
         $0.backgroundColor = .aladinGray2
     }
     // 알라딘 정보 뷰
-    private let aladinInfoContainerView = UIView()
+    private let aladinInfoContainerView = UIView().then {
+        $0.backgroundColor = .aladinGray1
+    }
+    private let aladinLogoView = UIImageView().then {
+        $0.image = ImageLiterals.Images.aladinLogo
+        $0.contentMode = .scaleAspectFill
+    }
+    private let aladinLogoLetterView = UIImageView().then {
+        $0.image = ImageLiterals.Images.aladinLogoLetter
+    }
+    private let aladinCompanyLabel = UILabel().then {
+        $0.text = "(주)알라딘커뮤니케이션"
+        $0.font = .systemFont(ofSize: 16, weight: .semibold)
+    }
+    private let aladinCompanyMoreButton = UIImageView().then {
+        $0.image = ImageLiterals.Icons.more2
+        $0.tintColor = .aladinGray6
+    }
+    private let serviceCenterLabel = UILabel().then {
+        $0.text = "고객센터 1544-1234"
+        $0.font = .systemFont(ofSize: 14, weight: .regular)
+    }
+    private lazy var buttonStackView = UIStackView().then {
+        $0.addArrangedSubview(logoutButton)
+        $0.addArrangedSubview(inquiryButton)
+        $0.addArrangedSubview(FAQButton)
+        $0.translatesAutoresizingMaskIntoConstraints = false
+        $0.axis = .horizontal
+        $0.alignment = .fill
+        $0.distribution = .fillEqually
+        $0.spacing = 6
+    }
+    private let logoutButton = UIButton().then {
+        $0.setTitle("로그아웃", for: .normal)
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+        $0.backgroundColor = .white
+        $0.layer.cornerRadius = 8
+    }
+    private let inquiryButton = UIButton().then {
+        $0.setTitle("1:1 문의", for: .normal)
+        $0.backgroundColor = .white
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+        $0.layer.cornerRadius = 8
+    }
+    private let FAQButton = UIButton().then {
+        $0.setTitle("FAQ", for: .normal)
+        $0.backgroundColor = .white
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+        $0.layer.cornerRadius = 8
+    }
+    private let infoButton = UIButton().then {
+        $0.setTitle("중고매장 위치, 영업시간 안내", for: .normal)
+        $0.backgroundColor = .white
+        $0.setTitleColor(.black, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 12, weight: .medium)
+        $0.layer.cornerRadius = 8
+    }
     
     //MARK: -
     
@@ -439,6 +498,16 @@ extension BookDetailVC {
             fullStarIcon4,
             halfStarIcon
         )
+        aladinInfoContainerView.addSubviews(
+            aladinLogoView,
+            aladinLogoLetterView,
+            aladinCompanyLabel,
+            aladinCompanyMoreButton,
+            serviceCenterLabel,
+            buttonStackView,
+            infoButton
+        )
+        
         //MARK: - naviViewLayout
         
         // testColors
@@ -762,6 +831,7 @@ extension BookDetailVC {
         }
         
         //MARK: - bookReviewLayout
+        
         reviewLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(41)
             $0.leading.equalToSuperview().offset(20)
@@ -843,6 +913,63 @@ extension BookDetailVC {
             $0.height.equalTo(4)
             $0.trailing.leading.equalToSuperview()
         }
+        
+        //MARK: - AladinInfoLayout
+        
+        aladinLogoView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(40)
+            $0.leading.equalToSuperview().offset(23)
+            $0.height.equalTo(32)
+            $0.width.equalTo(72)
+        }
+        aladinLogoLetterView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(51)
+            $0.leading.equalTo(aladinLogoView.snp.trailing).offset(9)
+            $0.height.equalTo(19)
+            $0.width.equalTo(54)
+        }
+        aladinCompanyLabel.snp.makeConstraints {
+            $0.top.equalTo(aladinLogoView.snp.bottom).offset(12)
+            $0.leading.equalToSuperview().offset(23)
+        }
+        aladinCompanyMoreButton.snp.makeConstraints {
+            $0.top.equalTo(aladinCompanyLabel)
+            $0.leading.equalTo(aladinCompanyLabel.snp.trailing).offset(4)
+            $0.height.width.equalTo(20)
+        }
+        serviceCenterLabel.snp.makeConstraints {
+            $0.top.equalTo(aladinCompanyLabel.snp.bottom).offset(20)
+            $0.leading.equalTo(aladinCompanyLabel)
+        }
+        buttonStackView.snp.makeConstraints {
+            $0.top.equalTo(serviceCenterLabel.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
+            $0.leading.trailing.equalToSuperview().inset(23)
+        }
+        logoutButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview()
+            $0.height.equalTo(38)
+        }
+        inquiryButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalTo(logoutButton.snp.trailing).offset(6)
+            $0.height.equalTo(38)
+        }
+        FAQButton.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalTo(inquiryButton.snp.trailing).offset(6)
+            $0.trailing.equalToSuperview()
+            $0.height.equalTo(38)
+        }
+        infoButton.snp.makeConstraints {
+            $0.top.equalTo(logoutButton.snp.bottom).offset(9)
+            $0.centerX.equalToSuperview()
+            $0.height.equalTo(38)
+            $0.leading.trailing.equalToSuperview().inset(23)
+        }
+        
+        
     }
 }
 
