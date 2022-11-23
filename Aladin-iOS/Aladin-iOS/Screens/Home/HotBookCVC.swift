@@ -10,8 +10,24 @@ import SnapKit
 import Then
 
 class HotBookCVC: UICollectionViewCell {
-    
-    private let bookSampleImageView = UIImageView()
+        
+    private let bookSampleImageView = UIImageView().then {
+        $0.contentMode = .scaleToFill
+        $0.clipsToBounds = true
+        $0.layer.cornerRadius = 5
+    }
+    private let bookNameLabel = UILabel().then {
+        $0.lineBreakMode = .byCharWrapping
+        $0.font = .systemFont(ofSize: 16)
+        $0.textColor = .aladinGray6
+        $0.numberOfLines = 0
+    }
+    private let bookIntroLabel = UILabel().then {
+        $0.lineBreakMode = .byCharWrapping
+        $0.font = .systemFont(ofSize: 12)
+        $0.textColor = .aladinGray6
+        $0.numberOfLines = 0
+    }
        
     
     
@@ -24,8 +40,10 @@ class HotBookCVC: UICollectionViewCell {
         setLayout()
     }
         
-    func dataBind(image : UIImage) {
-        bookSampleImageView.image = image
+    func dataBind(model : HotBookModel) {
+        bookSampleImageView.image = UIImage(named: model.sampleImage)
+        bookNameLabel.text = model.bookName
+        bookIntroLabel.text = model.bookIntro
     }
         
     required init?(coder: NSCoder) {
@@ -33,10 +51,23 @@ class HotBookCVC: UICollectionViewCell {
     }
     
     private func setLayout() {
-        contentView.addSubviews(bookSampleImageView)
+        contentView.addSubviews(bookSampleImageView,bookNameLabel,bookIntroLabel)
         
         bookSampleImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().offset(10)
+            make.height.equalTo(180)
+            make.leading.equalToSuperview()
+        }
+        
+        bookNameLabel.snp.makeConstraints { make in
+            make.top.equalTo(bookSampleImageView.snp.bottom).offset(10)
+            make.leading.trailing.equalToSuperview().inset(10)
+        }
+        
+        bookIntroLabel.snp.makeConstraints { make in
+            make.top.equalTo(bookNameLabel.snp.bottom).offset(4)
+            make.leading.trailing.equalToSuperview().inset(10)
+            make.bottom.equalToSuperview()
         }
     }
 }

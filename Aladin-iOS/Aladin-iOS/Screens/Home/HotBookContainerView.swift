@@ -13,22 +13,30 @@ class HotBookContainerView: UIView {
     private var hotBookCV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 130, height: 250)
+        layout.itemSize = CGSize(width: 130, height: 280)
         layout.minimumLineSpacing = 14
+        layout.minimumInteritemSpacing = 14
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         return cv
     }()
 
-    private var sampleImageData = [
-                UIImage(named: "bookSample1"),
-                UIImage(named: "bookSample2"),
-                UIImage(named: "bookSample3")
+//    private var sampleImage = [
+//                UIImage(named: "bookSample1"),
+//                UIImage(named: "bookSample2"),
+//                UIImage(named: "bookSample3")
+//    ]
+    
+    // MARK: - Variables
+    
+    var hotBookModel : [HotBookModel] = [
+        HotBookModel(sampleImage: "bookSample1", bookName: "브랜드로 남는다는 것", bookIntro: "끝까지 살아남는 브랜드는 무엇이 다른가"),
+        HotBookModel(sampleImage: "bookSample2", bookName: "피아노 치는 할머니가 될래", bookIntro: "인생 후반전에 만난 피아노를 향한 세레나데"),
+        HotBookModel(sampleImage: "bookSample3", bookName: "익스텐드 마인드", bookIntro: "창조성은 어떻게 뇌 바깥에서 탄생하는가"),
+        HotBookModel(sampleImage: "bookSample1", bookName: "스크롤테스트용", bookIntro: "스크롤 테스트용 어쩌고~ 브랜드는 무엇이 다른가")
     ]
-  
-    
-    
+
     // MARK: - View Life Cycle
     
     override init(frame: CGRect) {
@@ -47,7 +55,7 @@ class HotBookContainerView: UIView {
         
         hotBookCV.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(48)
-            make.leading.trailing.equalToSuperview()
+            make.leading.trailing.equalToSuperview().inset(10)
             make.bottom.equalToSuperview().inset(46)
         }
     }
@@ -61,12 +69,12 @@ class HotBookContainerView: UIView {
 
 extension HotBookContainerView: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return hotBookModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = hotBookCV.dequeueReusableCell(withReuseIdentifier: "2", for: indexPath) as! HotBookCVC
-        cell.dataBind(image: sampleImageData[indexPath.row]!)
+        cell.dataBind(model: hotBookModel[indexPath.item])
        
         return cell
     }
