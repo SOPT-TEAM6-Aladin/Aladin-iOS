@@ -30,7 +30,7 @@ enum ImageLiterals {
         
         static var detailBookSample: UIImage { .load(named: "detailBookSample") }
         
-        static var aladinLogo: UIImage { .load(named: "AppIcon") }
+        static var aladinLogo: UIImage { .load(named: "aladinLogo") }
         static var aladinLogoLetter: UIImage { .load(named: "logo_letter") }
     }
     
