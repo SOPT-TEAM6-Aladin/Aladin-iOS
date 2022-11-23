@@ -29,6 +29,8 @@ enum ImageLiterals {
         static var bottomBook: UIImage { .load(named: "bottomBook") }
         
         static var detailBookSample: UIImage { .load(named: "detailBookSample") }
+        
+        static var infoView: UIImage { .load(named: "infoView") }
     }
     
     struct Icons {

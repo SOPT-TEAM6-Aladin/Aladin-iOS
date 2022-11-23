@@ -17,6 +17,17 @@ final class MyPageVC: UITabBarController {
     private let tradeListContainerView = UIView()
     private let footerContainerView = UIView()
     
+    private let infoView = UIImageView().then {
+        $0.image = ImageLiterals.Images.infoView
+        $0.layer.shadowColor = UIColor.black.cgColor
+        $0.layer.shadowOffset = CGSize(width: 0, height: 4)
+        $0.layer.shadowRadius = 5
+        $0.layer.shadowOpacity = 0.1
+    }
+    
+    private let silverSticker = UIImageView().then {
+        $0.image = ImageLiterals.Icons.silverSticker
+    }
     
     // MARK: - View Life Cycle
     
@@ -28,6 +39,8 @@ final class MyPageVC: UITabBarController {
         
         scrollView.addSubviews(myInfoContainerView,tradeListContainerView,footerContainerView)
         
+        myInfoContainerView.addSubviews(infoView,silverSticker)
+        
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
@@ -36,6 +49,17 @@ final class MyPageVC: UITabBarController {
             make.top.equalToSuperview()
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(276)
+        }
+        
+        infoView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(28)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview().inset(48)
+        }
+        
+        silverSticker.snp.makeConstraints {
+            $0.top.equalTo(infoView)
+            $0.trailing.equalTo(infoView).inset(24)
         }
         
         tradeListContainerView.snp.makeConstraints { make in
