@@ -294,7 +294,7 @@ class BookDetailVC: UIViewController {
         $0.delegate = self
     }
     private let reviewContainerDivider = UIView().then {
-        $0.backgroundColor = UIColor.aladinGray2
+        $0.backgroundColor = .aladinGray2
     }
     // 알라딘 정보 뷰
     private let aladinInfoContainerView = UIView()
