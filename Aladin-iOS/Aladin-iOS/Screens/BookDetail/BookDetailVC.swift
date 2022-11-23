@@ -373,13 +373,18 @@ class BookDetailVC: UIViewController {
     }
     private lazy var basketToolBtn = UIButton().then {
         $0.setTitle("장바구니", for: .normal)
-        $0.setTitleColor(UIColor.black, for: .normal)
+        $0.backgroundColor = .aladinBlue
+        $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        $0.layer.cornerRadius = 12
     }
     private lazy var buyToolBtn = UIButton().then {
         $0.setTitle("구매하기", for: .normal)
         $0.setTitleColor(UIColor.black, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
+        $0.layer.cornerRadius = 12
+        $0.layer.borderColor = UIColor.aladinBlue.cgColor
+        $0.layer.borderWidth = 2
     }
     
     // MARK: - View Life Cycle
