@@ -12,7 +12,7 @@ import Then
 class HotBookCVC: UICollectionViewCell {
         
     private let bookSampleImageView = UIImageView().then {
-        $0.contentMode = .scaleToFill
+        $0.contentMode = .scaleAspectFit
         $0.clipsToBounds = true
         $0.layer.cornerRadius = 5
     }
@@ -54,20 +54,19 @@ class HotBookCVC: UICollectionViewCell {
         contentView.addSubviews(bookSampleImageView,bookNameLabel,bookIntroLabel)
         
         bookSampleImageView.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
+            make.top.equalToSuperview().offset(20)
             make.height.equalTo(180)
             make.leading.equalToSuperview()
         }
         
         bookNameLabel.snp.makeConstraints { make in
-            make.top.equalTo(bookSampleImageView.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.top.equalToSuperview().offset(200)
+            make.leading.trailing.equalToSuperview().offset(10)
         }
         
         bookIntroLabel.snp.makeConstraints { make in
-            make.top.equalTo(bookNameLabel.snp.bottom).offset(4)
-            make.leading.trailing.equalToSuperview().inset(10)
-            make.bottom.equalToSuperview()
+            make.top.equalToSuperview().offset(240)
+            make.leading.trailing.equalToSuperview().offset(10)
         }
     }
 }

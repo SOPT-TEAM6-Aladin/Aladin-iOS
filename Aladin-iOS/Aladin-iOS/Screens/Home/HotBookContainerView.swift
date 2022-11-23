@@ -13,8 +13,7 @@ class HotBookContainerView: UIView {
     private var hotBookCV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 130, height: 280)
-        layout.minimumLineSpacing = 14
+        layout.itemSize = CGSize(width: 120, height: 300)
         layout.minimumInteritemSpacing = 14
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
@@ -55,7 +54,8 @@ class HotBookContainerView: UIView {
         
         hotBookCV.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(48)
-            make.leading.trailing.equalToSuperview().inset(10)
+            make.leading.equalToSuperview().offset(10)
+            make.trailing.equalToSuperview()
             make.bottom.equalToSuperview().inset(46)
         }
     }
