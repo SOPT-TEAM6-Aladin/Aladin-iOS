@@ -7,12 +7,20 @@
 
 import UIKit
 
+import SnapKit
+
 final class MainTBC: UITabBarController {
     
     // MARK: - Properties
+    
     private var freshLaunch = true
     private let tabBarHeight: CGFloat = 96
     private let tabBarWidth: CGFloat = 270
+    
+    // MARK: - UI
+    
+    private let containerView = UIView()
+    private let horizontalLine = UIView()
 
     // MARK: - View Life Cycle
 
@@ -25,6 +33,7 @@ final class MainTBC: UITabBarController {
         super.viewDidLoad()
         setViewControllers()
         setTabBar()
+        setTabBackground()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -79,6 +88,28 @@ final class MainTBC: UITabBarController {
         tabBar.backgroundColor = .white
         tabBar.tintColor = .aladinBlue
         tabBar.unselectedItemTintColor = .black
+    }
+    
+    private func setTabBackground() {
+        let safeHeight = view.safeAreaInsets.bottom
+        containerView.backgroundColor = .white
+        horizontalLine.backgroundColor = .aladinGray1
+        
+        view.addSubviews(horizontalLine, containerView)
+        
+        self.view.bringSubviewToFront(self.tabBar)
+        self.view.bringSubviewToFront(self.horizontalLine)
+
+        containerView.snp.makeConstraints { make in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(safeHeight + tabBarHeight)
+        }
+        
+        horizontalLine.snp.makeConstraints { make in
+            make.top.equalTo(containerView).inset(1)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(1)
+        }
     }
 
     private func makeNavigationController(unselectedImage: UIImage?, selectedImage: UIImage?, rootViewController: UIViewController) -> UINavigationController {
