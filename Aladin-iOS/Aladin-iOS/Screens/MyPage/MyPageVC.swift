@@ -29,6 +29,28 @@ final class MyPageVC: UITabBarController {
         $0.image = ImageLiterals.Icons.silverSticker
     }
     
+    private let profileImage = UIImageView().then {
+        $0.image = ImageLiterals.Icons.profileColor
+    }
+    
+    private let levelLabel = UILabel().then {
+        $0.text = "LV."
+        $0.font = UIFont.font(.pretendardBold, ofSize: 20)
+        $0.textColor = .aladinGray6
+    }
+    
+    private let levelNumberLabel = UILabel().then {
+        $0.text = "3"
+        $0.font = UIFont.font(.pretendardBold, ofSize: 28)
+        $0.textColor = .aladinBlue
+    }
+    
+    private let helloLabel = UILabel().then {
+        $0.text = "램프의 지니요정님, 안녕하세요!"
+        $0.font = UIFont.font(.pretendardMedium, ofSize: 14)
+    }
+    
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -39,7 +61,7 @@ final class MyPageVC: UITabBarController {
         
         scrollView.addSubviews(myInfoContainerView,tradeListContainerView,footerContainerView)
         
-        myInfoContainerView.addSubviews(infoView,silverSticker)
+        myInfoContainerView.addSubviews(infoView,silverSticker,profileImage,levelLabel,levelNumberLabel,helloLabel)
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -53,13 +75,34 @@ final class MyPageVC: UITabBarController {
         
         infoView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(28)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview().inset(48)
+            $0.leading.trailing.equalToSuperview().inset(10)
+            $0.bottom.equalToSuperview().inset(28)
         }
         
         silverSticker.snp.makeConstraints {
             $0.top.equalTo(infoView)
             $0.trailing.equalTo(infoView).inset(24)
+        }
+        
+        profileImage.snp.makeConstraints {
+            $0.width.height.equalTo(60)
+            $0.top.equalToSuperview().offset(78)
+            $0.leading.equalToSuperview().offset(36)
+        }
+        
+        levelLabel.snp.makeConstraints {
+            $0.leading.equalTo(profileImage.snp.trailing).offset(5)
+            $0.top.equalToSuperview().offset(89)
+        }
+        
+        levelNumberLabel.snp.makeConstraints {
+            $0.leading.equalTo(levelLabel.snp.trailing).offset(2)
+            $0.bottom.equalTo(levelLabel).offset(2)
+        }
+        
+        helloLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(113)
+            $0.leading.equalTo(levelLabel)
         }
         
         tradeListContainerView.snp.makeConstraints { make in
@@ -74,5 +117,16 @@ final class MyPageVC: UITabBarController {
             make.height.equalTo(283)
             make.bottom.equalToSuperview()
         }
+    }
+}
+
+
+extension UILabel {
+    func asFont(targetString: String, font: UIFont) {
+        let fullText = text ?? ""
+        let attributedString = NSMutableAttributedString(string: fullText)
+        let range = (fullText as NSString).range(of: "램프의 지니요정")
+        attributedString.addAttribute(.font, value: font, range: range)
+        attributedText = attributedString
     }
 }
