@@ -50,6 +50,61 @@ final class MyPageVC: UITabBarController {
         $0.font = UIFont.font(.pretendardMedium, ofSize: 14)
     }
     
+    private let profileStackView = UIStackView().then {
+        $0.axis = .horizontal
+        $0.spacing = 58
+    }
+    
+    private let mileStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+    }
+    
+    private let mileLabel = UILabel().then {
+        $0.text = "마일리지"
+        $0.font = UIFont.font(.pretendardRegular, ofSize: 14)
+        $0.textColor = .aladinGray6
+    }
+    
+    private let mileNumLabel = UILabel().then {
+        $0.text = "1,000"
+        $0.font = UIFont.font(.pretendardMedium, ofSize: 18)
+        $0.textColor = .aladinBlue
+    }
+    
+    private let moneyStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+    }
+    
+    private let moneyLabel = UILabel().then {
+        $0.text = "적립금"
+        $0.font = UIFont.font(.pretendardRegular, ofSize: 14)
+        $0.textColor = .aladinGray6
+    }
+    
+    private let moneyNumLabel = UILabel().then {
+        $0.text = "3,500"
+        $0.font = UIFont.font(.pretendardMedium, ofSize: 18)
+        $0.textColor = .aladinBlue
+    }
+    
+    private let couponStackView = UIStackView().then {
+        $0.axis = .vertical
+        $0.spacing = 10
+    }
+    
+    private let couponLabel = UILabel().then {
+        $0.text = "할인쿠폰"
+        $0.font = UIFont.font(.pretendardRegular, ofSize: 14)
+        $0.textColor = .aladinGray6
+    }
+    
+    private let couponNumLabel = UILabel().then {
+        $0.text = "2"
+        $0.font = UIFont.font(.pretendardMedium, ofSize: 18)
+        $0.textColor = .aladinBlue
+    }
     
     // MARK: - View Life Cycle
     
@@ -61,7 +116,14 @@ final class MyPageVC: UITabBarController {
         
         scrollView.addSubviews(myInfoContainerView,tradeListContainerView,footerContainerView)
         
-        myInfoContainerView.addSubviews(infoView,silverSticker,profileImage,levelLabel,levelNumberLabel,helloLabel)
+        myInfoContainerView.addSubviews(infoView,silverSticker,profileStackView,profileImage,levelLabel,levelNumberLabel,helloLabel)
+        
+        profileStackView.addSubviews(mileStackView,moneyStackView,couponStackView)
+        
+        mileStackView.addSubviews(mileLabel,mileNumLabel)
+        moneyStackView.addSubviews(moneyLabel,moneyNumLabel)
+        couponStackView.addSubviews(couponLabel,couponNumLabel)
+        
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
@@ -105,6 +167,57 @@ final class MyPageVC: UITabBarController {
             $0.leading.equalTo(levelLabel)
         }
         
+        profileStackView.snp.makeConstraints {
+            $0.top.equalTo(helloLabel.snp.bottom).offset(36)
+            $0.leading.trailing.equalToSuperview().inset(58)
+            $0.bottom.equalToSuperview().inset(60)
+        }
+        
+        mileStackView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.leading.equalToSuperview().offset(26)
+        }
+        
+        mileLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        mileNumLabel.snp.makeConstraints {
+            $0.top.equalTo(mileLabel.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+        }
+        
+        moneyStackView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        moneyLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        moneyNumLabel.snp.makeConstraints {
+            $0.top.equalTo(moneyLabel.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+        }
+        
+        couponStackView.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(26)
+        }
+        
+        couponLabel.snp.makeConstraints {
+            $0.top.equalToSuperview()
+            $0.centerX.equalToSuperview()
+        }
+        
+        couponNumLabel.snp.makeConstraints {
+            $0.top.equalTo(couponLabel.snp.bottom).offset(10)
+            $0.centerX.equalToSuperview()
+        }
+
         tradeListContainerView.snp.makeConstraints { make in
             make.top.equalTo(myInfoContainerView.snp.bottom)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
