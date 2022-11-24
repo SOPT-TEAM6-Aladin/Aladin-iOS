@@ -44,6 +44,7 @@ extension BasketVC {
     //MARK: - register
     private func register() {
         basketTableView.register(BasketTableViewCell.self, forCellReuseIdentifier: BasketTableViewCell.identifier)
+        basketTableView.register(BasketHeaderView.self, forHeaderFooterViewReuseIdentifier: BasketHeaderView.identifier)
     }
     
     //MARK: - setLayout
@@ -79,7 +80,11 @@ extension BasketVC {
 
 extension BasketVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 132
+        if indexPath.row == basketDummy.count - 1 {
+            return 182
+        } else {
+            return 132
+        }
     }
 }
 
@@ -93,5 +98,15 @@ extension BasketVC : UITableViewDataSource {
         
         basketCell.dataBind(model: basketDummy[indexPath.row])
         return basketCell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: BasketHeaderView.identifier) as! BasketHeaderView
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 55
     }
 }

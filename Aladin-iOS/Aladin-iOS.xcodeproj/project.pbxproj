@@ -12,6 +12,7 @@
 		140A387A292BD81D00208C8D /* ReviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A3879292BD81D00208C8D /* ReviewModel.swift */; };
 		140A387C292E08EF00208C8D /* BasketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A387B292E08EF00208C8D /* BasketTableViewCell.swift */; };
 		140A387F292E090700208C8D /* BasketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A387E292E090700208C8D /* BasketModel.swift */; };
+		140A3883292FEEFB00208C8D /* BasketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A3882292FEEFB00208C8D /* BasketHeaderView.swift */; };
 		8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9D292293FF003E08B4 /* AppDelegate.swift */; };
 		8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9F292293FF003E08B4 /* SceneDelegate.swift */; };
 		8E333AA2292293FF003E08B4 /* MainTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333AA1292293FF003E08B4 /* MainTBC.swift */; };
@@ -46,6 +47,7 @@
 		140A3879292BD81D00208C8D /* ReviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewModel.swift; sourceTree = "<group>"; };
 		140A387B292E08EF00208C8D /* BasketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketTableViewCell.swift; sourceTree = "<group>"; };
 		140A387E292E090700208C8D /* BasketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketModel.swift; sourceTree = "<group>"; };
+		140A3882292FEEFB00208C8D /* BasketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketHeaderView.swift; sourceTree = "<group>"; };
 		8E333A9A292293FF003E08B4 /* Aladin-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aladin-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E333A9D292293FF003E08B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E333A9F292293FF003E08B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				8E7984D1292368BF00EDC6E3 /* BasketVC.swift */,
 				140A387B292E08EF00208C8D /* BasketTableViewCell.swift */,
 				140A387E292E090700208C8D /* BasketModel.swift */,
+				140A3882292FEEFB00208C8D /* BasketHeaderView.swift */,
 			);
 			path = Basket;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 				A305F36229279E8700FDF5DD /* BookCVC.swift in Sources */,
 				140A387A292BD81D00208C8D /* ReviewModel.swift in Sources */,
 				8E7984D0292368B700EDC6E3 /* HomeVC.swift in Sources */,
+				140A3883292FEEFB00208C8D /* BasketHeaderView.swift in Sources */,
 				8E7984CE292368AF00EDC6E3 /* MyPageVC.swift in Sources */,
 				140A387F292E090700208C8D /* BasketModel.swift in Sources */,
 				8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */,
