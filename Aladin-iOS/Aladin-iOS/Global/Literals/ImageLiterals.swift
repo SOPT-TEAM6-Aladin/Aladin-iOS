@@ -47,6 +47,7 @@ enum ImageLiterals {
         
         static var gift: UIImage { .load(named: "ic_gift") }
         static var profile: UIImage { .load(named: "ic_profile") }
+        static var profileColor: UIImage { .load(named: "ic_profile_color") }
         static var carpet: UIImage { .load(named: "ic_carpet") }
         
         static var bookKor: UIImage { .load(named: "ic_book_kor") }
