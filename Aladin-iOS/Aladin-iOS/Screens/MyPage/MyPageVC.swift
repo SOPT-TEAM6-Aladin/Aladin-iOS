@@ -11,6 +11,8 @@ import Then
 
 final class MyPageVC: UITabBarController {
     
+    // MARK: - UI Components
+
     private let scrollView = UIScrollView()
     
     private let myInfoContainerView = UIView()
@@ -127,7 +129,7 @@ final class MyPageVC: UITabBarController {
         }
 }
 
-// MARK: - Extensions
+    // MARK: - Extensions
 
 //램프의지니요정만 진하게 쓰고싶어 찾아본 코드인데 어떻게 쓰는걸까??
 
