@@ -80,7 +80,8 @@ final class BasketVC: UITabBarController {
     }
     
     @objc private func touchUpBackBtn() {
-        self.navigationController?.popViewController(animated: true)
+        let tabbar = MainTBC()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tabbar, animated: false)
     }
 }
 
@@ -104,6 +105,11 @@ extension BasketVC {
             basketTableView,
             tabbarContainerView
         )
+        
+        naviView.backgroundColor = .white
+        basketTableView.backgroundColor = .white
+        tabbarContainerView.backgroundColor = .white
+        
         naviView.addSubviews(backBtn, basketLabel)
         
         tabbarContainerView.addSubviews(
@@ -136,7 +142,8 @@ extension BasketVC {
         }
         purchaseButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview()
+            $0.height.equalTo(40)
+            $0.bottom.equalToSuperview().inset(10)
         }
         
         //MARK: - naviViewLayout

@@ -15,9 +15,10 @@ class BookDetailVC: UIViewController {
     
     // 네비 뷰
     private let naviView = UIView()
-    private let backBtn = UIButton().then {
+    private lazy var backBtn = UIButton().then {
         $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(dissmissVC), for: .touchUpInside)
     }
     
     private let searchBtn = UIButton().then {
@@ -404,13 +405,18 @@ class BookDetailVC: UIViewController {
     
     private func pushToBasketVC() {
         let basketVC = BasketVC()
-        self.navigationController?.pushViewController(basketVC, animated: true)
-        basketVC.navigationController?.isNavigationBarHidden = true
+        basketVC.modalPresentationStyle = .fullScreen
+        basketVC.modalTransitionStyle = .crossDissolve
+        self.present(basketVC, animated: true)
     }
     
     // MARK: - objc
     @objc private func touchUpBasketBtn() {
         pushToBasketVC()
+    }
+    
+    @objc private func dissmissVC() {
+        self.dismiss(animated: true)
     }
 }
 
@@ -534,6 +540,7 @@ extension BookDetailVC {
         //MARK: - naviViewLayout
         
         // testColors
+        naviView.backgroundColor = .white
         bookInfoContainerView.backgroundColor = .white
         bookPriceContainerView.backgroundColor = UIColor.aladinGray1
         bookReviewContainerView.backgroundColor = .white
