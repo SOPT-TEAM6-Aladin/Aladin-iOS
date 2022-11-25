@@ -8,9 +8,16 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class BookDetailVC: UIViewController {
 
+    //MARK: - Variables
+    
+    let detailProvider = MoyaProvider<UserRouter> (
+        plugins: [NetworkLoggerPlugin(verbose: true)]
+    )
+    
     //MARK: - UI Components
     
     // 네비 뷰
@@ -411,6 +418,27 @@ class BookDetailVC: UIViewController {
     // MARK: - objc
     @objc private func touchUpBasketBtn() {
         pushToBasketVC()
+    }
+    
+    var detailData: DetailResponseDto?
+    
+    //MARK: - Network Helpers
+    
+    private func detail(param: DetailResponseDto) {
+        detailProvider.request(.detail(param: param)) { response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    print("success")
+                }
+                else if status >= 400 {
+                    print("error")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
