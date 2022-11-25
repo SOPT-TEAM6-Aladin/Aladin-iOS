@@ -19,7 +19,7 @@ final class HomeVC: UITabBarController {
         $0.image = ImageLiterals.Images.banner
     }
     private let categoryContainerView = UIView()
-    private var editerChoiceContainerView =  EditerChoiceContainerView()
+    private var editerChoiceContainerView = EditerChoiceContainerView()
     private let hotBookContainerView = HotBookContainerView()
     private let giftContainerView = UIView()
     
@@ -215,6 +215,10 @@ final class HomeVC: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(editerChoiceContainerViewDidTap))
+        editerChoiceContainerView.addGestureRecognizer(tap)
+        
         view.addSubviews(scrollView)
         
         scrollView.addSubviews(searchContainerView,bannerImageView,categoryContainerView,editerChoiceContainerView,hotBookContainerView,giftContainerView)
@@ -526,5 +530,12 @@ final class HomeVC: UITabBarController {
             make.top.equalTo(giftImageNextButton.snp.bottom).offset(16)
             make.centerX.equalToSuperview()
         }
+    }
+    
+    
+    @objc private func editerChoiceContainerViewDidTap() {
+        let detailVC = BookDetailVC()
+        detailVC.modalPresentationStyle = .fullScreen
+        present(detailVC, animated: true)
     }
 }
