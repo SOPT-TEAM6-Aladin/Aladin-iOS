@@ -13,6 +13,7 @@
 		140A387C292E08EF00208C8D /* BasketTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A387B292E08EF00208C8D /* BasketTableViewCell.swift */; };
 		140A387F292E090700208C8D /* BasketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A387E292E090700208C8D /* BasketModel.swift */; };
 		140A3883292FEEFB00208C8D /* BasketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A3882292FEEFB00208C8D /* BasketHeaderView.swift */; };
+		140A38852930A04C00208C8D /* BasketFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A38842930A04C00208C8D /* BasketFooterView.swift */; };
 		8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9D292293FF003E08B4 /* AppDelegate.swift */; };
 		8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9F292293FF003E08B4 /* SceneDelegate.swift */; };
 		8E333AA2292293FF003E08B4 /* MainTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333AA1292293FF003E08B4 /* MainTBC.swift */; };
@@ -48,6 +49,7 @@
 		140A387B292E08EF00208C8D /* BasketTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketTableViewCell.swift; sourceTree = "<group>"; };
 		140A387E292E090700208C8D /* BasketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketModel.swift; sourceTree = "<group>"; };
 		140A3882292FEEFB00208C8D /* BasketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketHeaderView.swift; sourceTree = "<group>"; };
+		140A38842930A04C00208C8D /* BasketFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketFooterView.swift; sourceTree = "<group>"; };
 		8E333A9A292293FF003E08B4 /* Aladin-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aladin-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E333A9D292293FF003E08B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E333A9F292293FF003E08B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				140A387B292E08EF00208C8D /* BasketTableViewCell.swift */,
 				140A387E292E090700208C8D /* BasketModel.swift */,
 				140A3882292FEEFB00208C8D /* BasketHeaderView.swift */,
+				140A38842930A04C00208C8D /* BasketFooterView.swift */,
 			);
 			path = Basket;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				8E4FE7B329238B3800E9F36A /* FontLiterals.swift in Sources */,
 				8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */,
 				A305F36B292D730400FDF5DD /* HotBookCVC.swift in Sources */,
+				140A38852930A04C00208C8D /* BasketFooterView.swift in Sources */,
 				8E4FE7AD292381F600E9F36A /* Adjusted+.swift in Sources */,
 				8E4FE7B12923823400E9F36A /* getClassName.swift in Sources */,
 			);

@@ -15,9 +15,10 @@ final class BasketVC: UITabBarController {
     
     // 네비 뷰
     private let naviView = UIView()
-    private let backBtn = UIButton().then {
+    private lazy var backBtn = UIButton().then {
         $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(touchUpBackBtn), for: .touchUpInside)
     }
     private let basketLabel = UILabel().then {
         $0.text = "장바구니"
@@ -26,6 +27,7 @@ final class BasketVC: UITabBarController {
     
     // TableView
     private lazy var basketTableView = UITableView().then {
+        $0.allowsSelection = false
         $0.backgroundColor = .clear
         $0.separatorStyle = .none
         $0.dataSource = self
@@ -66,6 +68,19 @@ final class BasketVC: UITabBarController {
         super.viewDidLoad()
         setLayout()
         register()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        hideTabBar()
+    }
+    
+    func hideTabBar() {
+        self.tabBarController?.tabBar.layer.zPosition = -1
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    
+    @objc private func touchUpBackBtn() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
