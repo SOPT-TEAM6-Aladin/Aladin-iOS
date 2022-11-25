@@ -32,6 +32,34 @@ final class BasketVC: UITabBarController {
         $0.delegate = self
     }
     
+    // 하단 TabBar Container
+    private let tabbarContainerView = UIView()
+    private let totalPriceLabel = UILabel().then {
+        $0.text = "총 결제 예정금액"
+        $0.font = .systemFont(ofSize: 16, weight: .semibold)
+    }
+    private let totalPrice = UILabel().then {
+        $0.text = "10,800원"
+        $0.font = .systemFont(ofSize: 20, weight: .bold)
+    }
+    private let accumulateLabel = UILabel().then {
+        $0.text = "적립예정포인트"
+        $0.textColor = .aladinGray4
+        $0.font = .systemFont(ofSize: 12, weight: .medium)
+    }
+    private let accumlatePoint = UILabel().then {
+        $0.text = "600P"
+        $0.textColor = .aladinGray4
+        $0.font = .systemFont(ofSize: 12, weight: .medium)
+    }
+    private let purchaseButton = UIButton().then {
+        $0.setTitle("구매하기", for: .normal)
+        $0.backgroundColor = .aladinBlue
+        $0.layer.cornerRadius = 12
+        $0.setTitleColor(.white, for: .normal)
+        $0.titleLabel?.font = .systemFont(ofSize: 14, weight: .medium)
+    }
+    
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
@@ -59,8 +87,42 @@ extension BasketVC {
         view.addSubviews(
             naviView,
             basketTableView,
+            tabbarContainerView
         )
         naviView.addSubviews(backBtn, basketLabel)
+        
+        tabbarContainerView.addSubviews(
+            totalPriceLabel,
+            totalPrice,
+            accumulateLabel,
+            accumlatePoint,
+            purchaseButton
+        )
+        
+        tabbarContainerView.snp.makeConstraints {
+            $0.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.height.equalTo(145)
+        }
+        totalPriceLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(19)
+            $0.leading.equalToSuperview().offset(20)
+        }
+        totalPrice.snp.makeConstraints {
+            $0.centerY.equalTo(totalPriceLabel)
+            $0.trailing.equalToSuperview().inset(20)
+        }
+        accumulateLabel.snp.makeConstraints {
+            $0.top.equalTo(totalPriceLabel.snp.bottom).offset(16)
+            $0.leading.equalToSuperview().offset(19)
+        }
+        accumlatePoint.snp.makeConstraints {
+            $0.centerY.equalTo(accumulateLabel)
+            $0.trailing.equalToSuperview().inset(19)
+        }
+        purchaseButton.snp.makeConstraints {
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalToSuperview()
+        }
         
         //MARK: - naviViewLayout
         naviView.snp.makeConstraints {
@@ -81,6 +143,8 @@ extension BasketVC {
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalTo(tabbarContainerView.snp.top)
         }
+        
+        
     }
 }
 
@@ -103,7 +167,7 @@ extension BasketVC : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
+
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: BasketHeaderView.identifier) as! BasketHeaderView
         return view
     }
