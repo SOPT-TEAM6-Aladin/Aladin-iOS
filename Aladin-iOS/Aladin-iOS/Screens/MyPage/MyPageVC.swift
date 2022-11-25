@@ -106,10 +106,47 @@ final class MyPageVC: UITabBarController {
         $0.textColor = .aladinBlue
     }
     
+    //내역들 테이블뷰
+    private lazy var listTableView: UITableView = {
+        let tv = UITableView()
+        tv.backgroundColor = .clear
+        tv.separatorColor = .clear
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.delegate = self
+        tv.dataSource = self
+        return tv
+    }()
+       
     // MARK: - View Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        register()
+        setLayout()
+        }
+}
+
+// MARK: - Extensions
+
+extension UILabel {
+    func asFont(targetString: String, font: UIFont) {
+        let fullText = text ?? ""
+        let attributedString = NSMutableAttributedString(string: fullText)
+        let range = (fullText as NSString).range(of: "램프의 지니요정")
+        attributedString.addAttribute(.font, value: font, range: range)
+        attributedText = attributedString
+    }
+}
+    
+extension MyPageVC {
+        
+    private func register() {
+        listTableView.register(ListTVC.self, forCellReuseIdentifier: ListTVC.identifier)
+    }
+    
+    private func setLayout() {
+        
         view.addSubview(scrollView)
         myInfoContainerView.backgroundColor = .aladinBlue2
         footerContainerView.backgroundColor = .red
@@ -124,9 +161,12 @@ final class MyPageVC: UITabBarController {
         moneyStackView.addSubviews(moneyLabel,moneyNumLabel)
         couponStackView.addSubviews(couponLabel,couponNumLabel)
         
+        tradeListContainerView.addSubviews(listTableView)
+
         
         scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
+            
         }
         
         myInfoContainerView.snp.makeConstraints { make in
@@ -221,7 +261,7 @@ final class MyPageVC: UITabBarController {
         tradeListContainerView.snp.makeConstraints { make in
             make.top.equalTo(myInfoContainerView.snp.bottom)
             make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(541)
+            make.height.equalTo(560)
         }
         
         footerContainerView.snp.makeConstraints { make in
@@ -230,16 +270,29 @@ final class MyPageVC: UITabBarController {
             make.height.equalTo(283)
             make.bottom.equalToSuperview()
         }
+        
+        listTableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
 }
 
+extension MyPageVC: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let list = tableView.dequeueReusableCell(withIdentifier: ListTVC.identifier, for: indexPath)
+                as? ListTVC else { return UITableViewCell() }
+        
+        list.dataBind(model: dummyList[indexPath.row])
+        return list
+    }
+}
 
-extension UILabel {
-    func asFont(targetString: String, font: UIFont) {
-        let fullText = text ?? ""
-        let attributedString = NSMutableAttributedString(string: fullText)
-        let range = (fullText as NSString).range(of: "램프의 지니요정")
-        attributedString.addAttribute(.font, value: font, range: range)
-        attributedText = attributedString
+extension MyPageVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 180
     }
 }
