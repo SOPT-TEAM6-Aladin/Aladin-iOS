@@ -129,15 +129,17 @@ final class MyPageVC: UITabBarController {
 
 // MARK: - Extensions
 
-extension UILabel {
-    func asFont(targetString: String, font: UIFont) {
-        let fullText = text ?? ""
-        let attributedString = NSMutableAttributedString(string: fullText)
-        let range = (fullText as NSString).range(of: "램프의 지니요정")
-        attributedString.addAttribute(.font, value: font, range: range)
-        attributedText = attributedString
-    }
-}
+//램프의지니요정만 진하게 쓰고싶어 찾아본 코드인데 어떻게 쓰는걸까??
+
+//extension UILabel {
+//    func asFont(targetString: String, font: UIFont) {
+//        let fullText = text ?? ""
+//        let attributedString = NSMutableAttributedString(string: fullText)
+//        let range = (fullText as NSString).range(of: "램프의 지니요정")
+//        attributedString.addAttribute(.font, value: font, range: range)
+//        attributedText = attributedString
+//    }
+//}
     
 extension MyPageVC {
         
@@ -285,6 +287,7 @@ extension MyPageVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let list = tableView.dequeueReusableCell(withIdentifier: ListTVC.identifier, for: indexPath)
                 as? ListTVC else { return UITableViewCell() }
+        list.selectionStyle = .none
         
         list.dataBind(model: dummyList[indexPath.row])
         return list
