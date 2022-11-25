@@ -536,6 +536,7 @@ final class HomeVC: UITabBarController {
     @objc private func editerChoiceContainerViewDidTap() {
         let detailVC = BookDetailVC()
         detailVC.modalPresentationStyle = .fullScreen
+        detailVC.modalTransitionStyle = .crossDissolve
         present(detailVC, animated: true)
     }
 }
