@@ -24,9 +24,10 @@ class BookDetailVC: UIViewController {
         $0.setImage(UIImage(named: "ic_search"), for: .normal)
     }
     
-    private let basketBtn = UIButton().then {
+    private lazy var basketBtn = UIButton().then {
         $0.setImage(UIImage(systemName: "cart"), for: .normal)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(touchUpBasketBtn), for: .touchUpInside)
     }
     
     // 스크롤 뷰
@@ -377,6 +378,7 @@ class BookDetailVC: UIViewController {
         $0.setTitleColor(.white, for: .normal)
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
         $0.layer.cornerRadius = 12
+        $0.addTarget(self, action: #selector(touchUpBasketBtn), for: .touchUpInside)
     }
     private lazy var buyToolBtn = UIButton().then {
         $0.setTitle("구매하기", for: .normal)
@@ -392,7 +394,23 @@ class BookDetailVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setLayout()
+        setNavigationBarHidden()
         register()
+    }
+    
+    private func setNavigationBarHidden() {
+        self.navigationController?.isNavigationBarHidden = true
+    }
+    
+    private func pushToBasketVC() {
+        let basketVC = BasketVC()
+        self.navigationController?.pushViewController(basketVC, animated: true)
+        basketVC.navigationController?.isNavigationBarHidden = true
+    }
+    
+    // MARK: - objc
+    @objc private func touchUpBasketBtn() {
+        pushToBasketVC()
     }
 }
 

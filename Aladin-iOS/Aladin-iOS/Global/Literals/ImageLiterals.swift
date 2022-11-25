@@ -30,6 +30,9 @@ enum ImageLiterals {
         
         static var detailBookSample: UIImage { .load(named: "detailBookSample") }
         
+        static var detailBookImage1: UIImage { .load(named: "book_image1") }
+        static var detailBookImage2: UIImage { .load(named: "book_image2") }
+        
         static var aladinLogo: UIImage { .load(named: "aladinLogo") }
         static var aladinLogoLetter: UIImage { .load(named: "logo_letter") }
     }
@@ -69,6 +72,13 @@ enum ImageLiterals {
         
         static var goldSticker: UIImage { .load(named: "goldSticker") }
         static var silverSticker: UIImage { .load(named: "silverSticker") }
+        
+        static var checkActive: UIImage {
+            .load(named: "ic_check_active")
+        }
+        static var checkInActive: UIImage {
+            .load(named: "ic_check_inactive")
+        }
     }
 }
 
