@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import SnapKit
+import Then
 
 final class BasketVC: UITabBarController {
     
@@ -45,6 +47,7 @@ extension BasketVC {
     private func register() {
         basketTableView.register(BasketTableViewCell.self, forCellReuseIdentifier: BasketTableViewCell.identifier)
         basketTableView.register(BasketHeaderView.self, forHeaderFooterViewReuseIdentifier: BasketHeaderView.identifier)
+        basketTableView.register(BasketFooterView.self, forHeaderFooterViewReuseIdentifier: BasketFooterView.identifier)
     }
     
     //MARK: - setLayout
@@ -53,7 +56,10 @@ extension BasketVC {
         
         //MARK: - addSubViews
         
-        view.addSubviews(naviView, basketTableView)
+        view.addSubviews(
+            naviView,
+            basketTableView,
+        )
         naviView.addSubviews(backBtn, basketLabel)
         
         //MARK: - naviViewLayout
@@ -73,18 +79,14 @@ extension BasketVC {
         basketTableView.snp.makeConstraints {
             $0.top.equalTo(naviView.snp.bottom)
             $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(400)
+            $0.bottom.equalTo(tabbarContainerView.snp.top)
         }
     }
 }
 
 extension BasketVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == basketDummy.count - 1 {
-            return 182
-        } else {
-            return 132
-        }
+        return indexPath.row == basketDummy.count - 1 ? 182 : 132
     }
 }
 
@@ -106,7 +108,17 @@ extension BasketVC : UITableViewDataSource {
         return view
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: BasketFooterView.identifier) as! BasketFooterView
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 55
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 92
     }
 }
