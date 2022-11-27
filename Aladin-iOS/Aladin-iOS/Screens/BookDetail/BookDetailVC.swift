@@ -15,11 +15,11 @@ class BookDetailVC: UIViewController {
     // MARK: - Properties
     
     let bookProvider = MoyaProvider<BookRouter>(
-    plugins: [NetworkLoggerPlugin(verbose: true)])
-
+        plugins: [NetworkLoggerPlugin(verbose: true)])
+    
     //MARK: - Variables
     
-    let detailProvider = MoyaProvider<UserRouter> (
+    let detailProvider = MoyaProvider<BookRouter> (
         plugins: [NetworkLoggerPlugin(verbose: true)]
     )
     
@@ -30,7 +30,7 @@ class BookDetailVC: UIViewController {
     private lazy var backBtn = UIButton().then {
         $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         $0.tintColor = .black
-        $0.addTarget(self, action: #selector(dissmissVC), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
     }
     
     private let searchBtn = UIButton().then {
@@ -416,6 +416,7 @@ class BookDetailVC: UIViewController {
         setLayout()
         setNavigationBarHidden()
         register()
+        fetchBookDetail(id: 2)
     }
     
     private func setNavigationBarHidden() {
@@ -437,11 +438,10 @@ class BookDetailVC: UIViewController {
         heartToolBtn.isSelected.toggle()
         fetchBookLike(bookId: 2)
     }
+    
+    @objc private func dismissVC() {
         self.dismiss(animated: true)
     }
-    @objc private func dissmissVC() {
-    
-    
 }
 
 //MARK: - Extension
@@ -1062,6 +1062,42 @@ extension BookDetailVC {
                     do {
                         let responseDto = try result.map(BookLikeResponseDTO.self)
                         self.heartToolBtn.isSelected = responseDto.data.hasLike
+                    }
+                    catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status >= 400 {
+                    print("400 error")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func discount(origin: Int, discountRate: Int) -> Int{
+        let result : Int = origin * (100 - discountRate) / 100
+        return result
+    }
+    
+    func fetchBookDetail(id: Int){
+        bookProvider.request(.fetchBookDetail(id: id)) { response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        let responseDetailDto = try result.map(BookDetailResponseDTO.self)
+                        let data = responseDetailDto.data
+                        self.bookName.text = data.name
+                        self.bookIntroDetail.text = data.description
+                        self.bookPrize.text = data.intro
+                        self.bookWrite.text = "\(data.author)(지은이) | \(data.painter)(그림)"
+                        self.originPrice.text = "\(data.price)원"
+                        self.discountPrice.text = "\(self.discount(origin: data.price, discountRate: data.discount_rate))원"
+                        self.bookIntroDetail.text = data.content
+                        self.bookStoryDetail.text = data.summary
+                        self.heartToolBtn.isSelected = data.like
                     }
                     catch(let error) {
                         print(error.localizedDescription)
