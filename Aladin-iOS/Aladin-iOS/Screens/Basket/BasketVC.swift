@@ -26,9 +26,9 @@ final class BasketVC: UITabBarController {
     }
     
     // TableView
-    private lazy var basketTableView = UITableView().then {
+    private lazy var basketTableView: UITableView = UITableView(frame: CGRect.zero, style: .grouped).then {
         $0.allowsSelection = false
-        $0.backgroundColor = .clear
+        $0.backgroundColor = .white
         $0.separatorStyle = .none
         $0.dataSource = self
         $0.delegate = self
@@ -41,7 +41,7 @@ final class BasketVC: UITabBarController {
         $0.font = .systemFont(ofSize: 16, weight: .semibold)
     }
     private let totalPrice = UILabel().then {
-        $0.text = "10,800원"
+        $0.text = "64,400원"
         $0.font = .systemFont(ofSize: 20, weight: .bold)
     }
     private let accumulateLabel = UILabel().then {
@@ -50,7 +50,7 @@ final class BasketVC: UITabBarController {
         $0.font = .systemFont(ofSize: 12, weight: .medium)
     }
     private let accumlatePoint = UILabel().then {
-        $0.text = "600P"
+        $0.text = "644P"
         $0.textColor = .aladinGray4
         $0.font = .systemFont(ofSize: 12, weight: .medium)
     }
@@ -80,7 +80,8 @@ final class BasketVC: UITabBarController {
     }
     
     @objc private func touchUpBackBtn() {
-        self.navigationController?.popViewController(animated: true)
+        let tabbar = MainTBC()
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(tabbar, animated: false)
     }
 }
 
@@ -104,6 +105,11 @@ extension BasketVC {
             basketTableView,
             tabbarContainerView
         )
+        
+        naviView.backgroundColor = .white
+        basketTableView.backgroundColor = .white
+        tabbarContainerView.backgroundColor = .white
+        
         naviView.addSubviews(backBtn, basketLabel)
         
         tabbarContainerView.addSubviews(
@@ -136,7 +142,8 @@ extension BasketVC {
         }
         purchaseButton.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.bottom.equalToSuperview()
+            $0.height.equalTo(40)
+            $0.bottom.equalToSuperview().inset(10)
         }
         
         //MARK: - naviViewLayout

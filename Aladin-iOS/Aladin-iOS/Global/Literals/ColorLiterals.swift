@@ -17,6 +17,10 @@ extension UIColor {
         return UIColor(hex: "#3B499F")
     }
     
+    static var aladinBlue2: UIColor {
+        return UIColor(hex: "#E8EAF2")
+    }
+    
     static var aladinYellow: UIColor {
         return UIColor(hex: "#FEB937")
     }

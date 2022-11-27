@@ -11,6 +11,11 @@ import Then
 import Moya
 
 class BookDetailVC: UIViewController {
+    
+    // MARK: - Properties
+    
+    let bookProvider = MoyaProvider<BookRouter>(
+    plugins: [NetworkLoggerPlugin(verbose: true)])
 
     //MARK: - Variables
     
@@ -22,9 +27,10 @@ class BookDetailVC: UIViewController {
     
     // 네비 뷰
     private let naviView = UIView()
-    private let backBtn = UIButton().then {
+    private lazy var backBtn = UIButton().then {
         $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         $0.tintColor = .black
+        $0.addTarget(self, action: #selector(dissmissVC), for: .touchUpInside)
     }
     
     private let searchBtn = UIButton().then {
@@ -97,9 +103,13 @@ class BookDetailVC: UIViewController {
         $0.backgroundColor = UIColor.aladinGray1
     }
     private let originPrice = UILabel().then {
-        $0.text = "12,000원"
+        
+        let attributeString = NSMutableAttributedString(string: "12,000원")
+        attributeString.addAttribute(NSAttributedString.Key.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, attributeString.length))
+        
         $0.textColor = UIColor.aladinGray4
         $0.font = .systemFont(ofSize: 12, weight: .regular)
+        $0.attributedText = attributeString
     }
     private let discountPrice = UILabel().then {
         $0.text = "10,800원"
@@ -371,7 +381,10 @@ class BookDetailVC: UIViewController {
     // 하단 탭바 뷰
     private let toolBarContainerView = UIView()
     private lazy var heartToolBtn = UIButton().then {
-        $0.setImage(ImageLiterals.Icons.pinkHeartCircle, for: .normal)
+        $0.isSelected = true
+        $0.setImage(ImageLiterals.Icons.pinkHeartCircle, for: .selected)
+        $0.setImage(ImageLiterals.Icons.grayHeartCircle, for: .normal)
+        $0.addTarget(self, action: #selector(heartToolBtnDidTap), for: .touchUpInside)
     }
     private let toolDivider = UIView().then {
         $0.backgroundColor = UIColor.aladinGray3
@@ -411,35 +424,24 @@ class BookDetailVC: UIViewController {
     
     private func pushToBasketVC() {
         let basketVC = BasketVC()
-        self.navigationController?.pushViewController(basketVC, animated: true)
-        basketVC.navigationController?.isNavigationBarHidden = true
+        basketVC.modalPresentationStyle = .fullScreen
+        basketVC.modalTransitionStyle = .crossDissolve
+        self.present(basketVC, animated: true)
     }
     
     // MARK: - objc
     @objc private func touchUpBasketBtn() {
         pushToBasketVC()
     }
-    
-    var detailData: DetailResponseDto?
-    
-    //MARK: - Network Helpers
-    
-    private func detail(param: DetailResponseDto) {
-        detailProvider.request(.detail(param: param)) { response in
-            switch response {
-            case .success(let result):
-                let status = result.statusCode
-                if status >= 200 && status < 300 {
-                    print("success")
-                }
-                else if status >= 400 {
-                    print("error")
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+    @objc private func heartToolBtnDidTap() {
+        heartToolBtn.isSelected.toggle()
+        fetchBookLike(bookId: 2)
     }
+        self.dismiss(animated: true)
+    }
+    @objc private func dissmissVC() {
+    
+    
 }
 
 //MARK: - Extension
@@ -562,6 +564,7 @@ extension BookDetailVC {
         //MARK: - naviViewLayout
         
         // testColors
+        naviView.backgroundColor = .white
         bookInfoContainerView.backgroundColor = .white
         bookPriceContainerView.backgroundColor = UIColor.aladinGray1
         bookReviewContainerView.backgroundColor = .white
@@ -946,7 +949,7 @@ extension BookDetailVC {
         }
         reviewButton.snp.makeConstraints {
             $0.top.equalTo(reviewContainer.snp.bottom).offset(15)
-            $0.leading.trailing.equalToSuperview().inset(5)
+            $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(37)
         }
         reviewRatingContainerDivier.snp.makeConstraints {
@@ -1035,6 +1038,7 @@ extension BookDetailVC : UITableViewDataSource {
         guard let reviewCell = tableView.dequeueReusableCell(withIdentifier: BookReviewTableViewCell.identifier, for: indexPath) as? BookReviewTableViewCell else { return UITableViewCell() }
         
         reviewCell.dataBind(model: reviewDummy[indexPath.row])
+        reviewCell.selectionStyle = .none
         return reviewCell
     }
 }
@@ -1042,5 +1046,32 @@ extension BookDetailVC : UITableViewDataSource {
 extension BookDetailVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 87
+    }
+}
+
+// MARK: - Network
+
+extension BookDetailVC {
+    
+    func fetchBookLike(bookId: Int){
+        bookProvider.request(.fetchBookLike(bookId: bookId)) { response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        let responseDto = try result.map(BookLikeResponseDTO.self)
+                        self.heartToolBtn.isSelected = responseDto.data.hasLike
+                    }
+                    catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status >= 400 {
+                    print("400 error")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }

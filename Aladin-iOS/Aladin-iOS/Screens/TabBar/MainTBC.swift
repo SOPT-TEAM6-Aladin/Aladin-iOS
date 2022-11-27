@@ -14,7 +14,7 @@ final class MainTBC: UITabBarController {
     // MARK: - Properties
     
     private var freshLaunch = true
-    private let tabBarHeight: CGFloat = 96
+    private let tabBarHeight: CGFloat = 49
     private let tabBarWidth: CGFloat = 270
     
     // MARK: - UI
@@ -33,7 +33,7 @@ final class MainTBC: UITabBarController {
         super.viewDidLoad()
         setViewControllers()
         setTabBar()
-        setTabBackground()
+//        setTabBackground()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,7 +48,7 @@ final class MainTBC: UITabBarController {
         tabFrame.size.width = tabBarWidth
         tabFrame.size.height = tabBarHeight + safeHeight
         tabFrame.origin.x = (self.view.frame.size.width - tabBarWidth) / 2
-        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight
+        tabFrame.origin.y = self.view.frame.size.height - tabBarHeight - safeHeight/2
         self.tabBar.frame = tabFrame
     }
     
