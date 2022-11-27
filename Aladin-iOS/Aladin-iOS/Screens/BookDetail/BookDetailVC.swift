@@ -8,8 +8,14 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 class BookDetailVC: UIViewController {
+    
+    // MARK: - Properties
+    
+    let bookProvider = MoyaProvider<BookRouter>(
+    plugins: [NetworkLoggerPlugin(verbose: true)])
 
     //MARK: - UI Components
     
@@ -428,6 +434,7 @@ class BookDetailVC: UIViewController {
     
     @objc private func heartToolBtnDidTap() {
         heartToolBtn.isSelected.toggle()
+        fetchBookLike(bookId: 2)
     }
 }
 
@@ -1033,5 +1040,32 @@ extension BookDetailVC : UITableViewDataSource {
 extension BookDetailVC : UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 87
+    }
+}
+
+// MARK: - Network
+
+extension BookDetailVC {
+    
+    func fetchBookLike(bookId: Int){
+        bookProvider.request(.fetchBookLike(bookId: bookId)) { response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        let responseDto = try result.map(BookLikeResponseDTO.self)
+                        self.heartToolBtn.isSelected = responseDto.data.hasLike
+                    }
+                    catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status >= 400 {
+                    print("400 error")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
