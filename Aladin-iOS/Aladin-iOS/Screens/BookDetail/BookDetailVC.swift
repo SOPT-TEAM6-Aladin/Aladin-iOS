@@ -54,7 +54,7 @@ class BookDetailVC: UIViewController {
     
     // 책 상세정보 뷰
     private let bookInfoContainerView = UIView()
-    private let bookImage = UIImageView().then {
+    private lazy var bookImage = UIImageView().then {
         $0.image = ImageLiterals.Images.detailBookSample
         $0.contentMode = .scaleAspectFill
     }
@@ -1089,6 +1089,7 @@ extension BookDetailVC {
                     do {
                         let responseDetailDto = try result.map(BookDetailResponseDTO.self)
                         let data = responseDetailDto.data
+                        self.bookImage.loadURLImage(URL(string: data.cover)!)
                         self.bookName.text = data.name
                         self.bookIntroDetail.text = data.description
                         self.bookPrize.text = data.intro
