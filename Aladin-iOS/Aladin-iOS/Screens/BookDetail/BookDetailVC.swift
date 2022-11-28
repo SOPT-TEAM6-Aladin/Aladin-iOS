@@ -1094,8 +1094,8 @@ extension BookDetailVC {
                         self.bookIntroDetail.text = data.description
                         self.bookPrize.text = data.intro
                         self.bookWrite.text = "\(data.author)(지은이) | \(data.painter)(그림)"
-                        self.originPrice.text = "\(data.price)원"
-                        self.discountPrice.text = "\(self.discount(origin: data.price, discountRate: data.discount_rate))원"
+                        self.originPrice.text = "\(addComma(value: data.price))"
+                        self.discountPrice.text = "\(addComma(value: self.discount(origin: data.price, discountRate: data.discount_rate)))"
                         self.bookIntroDetail.text = data.content
                         self.bookStoryDetail.text = data.summary
                         self.heartToolBtn.isSelected = data.like
