@@ -17,12 +17,6 @@ class BookDetailVC: UIViewController {
     let bookProvider = MoyaProvider<BookRouter>(
         plugins: [NetworkLoggerPlugin(verbose: true)])
     
-    //MARK: - Variables
-    
-    let detailProvider = MoyaProvider<BookRouter> (
-        plugins: [NetworkLoggerPlugin(verbose: true)]
-    )
-    
     //MARK: - UI Components
     
     // 네비 뷰
@@ -1080,6 +1074,20 @@ extension BookDetailVC {
         return result
     }
     
+    func fetchDetail(data: BookDetailResponseDTO) {
+        let data = data.data
+        self.bookImage.loadURLImage(URL(string: data.cover)!)
+        self.bookName.text = data.name
+        self.bookIntroDetail.text = data.description
+        self.bookPrize.text = data.intro
+        self.bookWrite.text = "\(data.author)(지은이) | \(data.painter)(그림)"
+        self.originPrice.text = "\(addComma(value: data.price))"
+        self.discountPrice.text = "\(addComma(value: self.discount(origin: data.price, discountRate: data.discount_rate)))"
+        self.bookIntroDetail.text = data.content
+        self.bookStoryDetail.text = data.summary
+        self.heartToolBtn.isSelected = data.like
+    }
+    
     func fetchBookDetail(id: Int){
         bookProvider.request(.fetchBookDetail(id: id)) { response in
             switch response {
@@ -1088,17 +1096,7 @@ extension BookDetailVC {
                 if status >= 200 && status < 300 {
                     do {
                         let responseDetailDto = try result.map(BookDetailResponseDTO.self)
-                        let data = responseDetailDto.data
-                        self.bookImage.loadURLImage(URL(string: data.cover)!)
-                        self.bookName.text = data.name
-                        self.bookIntroDetail.text = data.description
-                        self.bookPrize.text = data.intro
-                        self.bookWrite.text = "\(data.author)(지은이) | \(data.painter)(그림)"
-                        self.originPrice.text = "\(addComma(value: data.price))"
-                        self.discountPrice.text = "\(addComma(value: self.discount(origin: data.price, discountRate: data.discount_rate)))"
-                        self.bookIntroDetail.text = data.content
-                        self.bookStoryDetail.text = data.summary
-                        self.heartToolBtn.isSelected = data.like
+                        self.fetchDetail(data: responseDetailDto)
                     }
                     catch(let error) {
                         print(error.localizedDescription)
