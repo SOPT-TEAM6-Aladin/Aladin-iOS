@@ -48,6 +48,8 @@
 		A305F36D292DF31D00FDF5DD /* HotBookModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A305F36C292DF31D00FDF5DD /* HotBookModel.swift */; };
 		A305F36F2930889D00FDF5DD /* ListTVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A305F36E2930889D00FDF5DD /* ListTVC.swift */; };
 		A305F37129308C3300FDF5DD /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A305F37029308C3300FDF5DD /* ListModel.swift */; };
+		A33402FF294C524500514DEE /* BookListResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33402FE294C524500514DEE /* BookListResponseDTO.swift */; };
+		A3340301294C541E00514DEE /* BookListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3340300294C541E00514DEE /* BookListRouter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -91,6 +93,8 @@
 		A305F36C292DF31D00FDF5DD /* HotBookModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotBookModel.swift; sourceTree = "<group>"; };
 		A305F36E2930889D00FDF5DD /* ListTVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTVC.swift; sourceTree = "<group>"; };
 		A305F37029308C3300FDF5DD /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
+		A33402FE294C524500514DEE /* BookListResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListResponseDTO.swift; sourceTree = "<group>"; };
+		A3340300294C541E00514DEE /* BookListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookListRouter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				8EE879BB2931FD8A005F7AEC /* BookLikeResponseDTO.swift */,
+				A33402FE294C524500514DEE /* BookListResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -245,6 +250,7 @@
 			children = (
 				8EE879B32931F0D0005F7AEC /* BookRouter.swift */,
 				8EE879B52931F0DE005F7AEC /* BasketRouter.swift */,
+				A3340300294C541E00514DEE /* BookListRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -424,10 +430,12 @@
 				8EE879B22931F065005F7AEC /* APIConstants.swift in Sources */,
 				140A38852930A04C00208C8D /* BasketFooterView.swift in Sources */,
 				8EE879BC2931FD8A005F7AEC /* BookLikeResponseDTO.swift in Sources */,
+				A3340301294C541E00514DEE /* BookListRouter.swift in Sources */,
 				8E4FE7AD292381F600E9F36A /* Adjusted+.swift in Sources */,
 				8EE879BA2931F0EC005F7AEC /* NetworkLoggerPlugin.swift in Sources */,
 				8EE879B82931F0E6005F7AEC /* Encodable+.swift in Sources */,
 				8E4FE7B12923823400E9F36A /* getClassName.swift in Sources */,
+				A33402FF294C524500514DEE /* BookListResponseDTO.swift in Sources */,
 				8EE879B42931F0D0005F7AEC /* BookRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
