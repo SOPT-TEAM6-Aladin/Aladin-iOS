@@ -10,6 +10,8 @@ import SnapKit
 import Then
 
 class HotBookCVC: UICollectionViewCell {
+    
+    static let identifier = "HotBookCVC"
         
     private let bookSampleImageView = UIImageView().then {
         $0.contentMode = .scaleAspectFit
@@ -40,10 +42,27 @@ class HotBookCVC: UICollectionViewCell {
         setLayout()
     }
         
-    func dataBind(model : HotBookModel) {
-        bookSampleImageView.image = UIImage(named: model.sampleImage)
-        bookNameLabel.text = model.bookName
-        bookIntroLabel.text = model.bookIntro
+    func dataBind(model : BookListDataArray) {
+        
+        DispatchQueue.global().async { [weak self] in
+            let url = URL(string: model.cover)
+            if let data = try? Data(contentsOf: url!) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.bookSampleImageView.image = image
+                    }
+                }
+            }
+        }
+//        let url = URL(string: model.cover)
+//        do {
+//            let data = try Data(contentsOf: url!)
+//            bookSampleImageView.image = UIImage(data: data)
+//        } catch (let error) {
+//            print("err")
+//        }
+        bookNameLabel.text = model.name
+        bookIntroLabel.text = model.pickDescription
     }
         
     required init?(coder: NSCoder) {
