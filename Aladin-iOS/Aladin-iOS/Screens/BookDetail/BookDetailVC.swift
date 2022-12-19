@@ -599,6 +599,8 @@ extension BookDetailVC {
         bookImage.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(15)
+            $0.height.equalTo(254)
+            $0.width.equalTo(176)
         }
         
         goldStickerImage.snp.makeConstraints{
