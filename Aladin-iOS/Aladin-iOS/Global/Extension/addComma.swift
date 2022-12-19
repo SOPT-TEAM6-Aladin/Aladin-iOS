@@ -8,10 +8,10 @@
 import Foundation
 
 //MARK: - 천단위마다 ,표시
-func addComma(value: Int) -> String{
+func addComma(value: Int) -> String {
     let numberFormatter = NumberFormatter()
     numberFormatter.numberStyle = .decimal
-    let result = numberFormatter.string(from: NSNumber(value: value))! + "원"
+    let result = numberFormatter.string(from: NSNumber(value: value)) ?? ""
     
-    return result
+    return result + "원"
 }

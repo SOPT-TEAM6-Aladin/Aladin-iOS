@@ -13,13 +13,12 @@ class BasketTableViewCell: UITableViewCell {
     
     static let identifier = "BasketTableViewCell"
     
-    var checkboxActive = UIImageView().then {
-        $0.image = ImageLiterals.Icons.checkActive
+    lazy var checkbox = UIButton().then {
+        $0.isSelected = true
+        $0.setImage(ImageLiterals.Icons.checkActive, for: .selected)
+        $0.setImage(ImageLiterals.Icons.checkInActive, for: .normal)
+        $0.addTarget(self, action: #selector(checkBtnDidTap), for: .touchUpInside)
     }
-    var checkboxInActive = UIImageView().then {
-        $0.image = ImageLiterals.Icons.checkInActive
-    }
-    var checkbox = UIImageView()
     var image = UIImageView()
     var name = UILabel().then {
         $0.font = .systemFont(ofSize: 12, weight: .semibold)
@@ -55,13 +54,15 @@ class BasketTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc private func checkBtnDidTap() {
+        checkbox.isSelected.toggle()
+    }
 }
 
 extension BasketTableViewCell {
     func setLayout() {
         contentView.addSubviews(
-            checkboxActive,
-            checkboxInActive,
             checkbox,
             image,
             name,
@@ -112,13 +113,9 @@ extension BasketTableViewCell {
     func dataBind(model: BasketModel) {
         image.image = model.image
         name.text = model.name
-        price.text = model.price
+        price.text = "\(model.price)원"
         quantity.text = model.quantity
         deliveryInfo.text = model.deliveryInfo
-        if model.ischecked {
-            checkbox.image = checkboxActive.image
-        } else {
-            checkbox.image = checkboxInActive.image
-        }
+        checkbox.isSelected = model.ischecked
     }
 }
