@@ -10,6 +10,22 @@ import SnapKit
 import Then
 
 final class BasketVC: UITabBarController {
+   
+    var isChecked : Bool = false {
+        didSet {
+            basketTableView.reloadData()
+        }
+    }
+    
+    // MARK: - Dummy
+    
+    var basketDummy : [BasketModel] = [
+        BasketModel(image: UIImage(named: "book_image1"), name: "기소영의 친구들", price: 10800, quantity: "1", deliveryInfo: "11월 7일(월) 밤 11시 잠들기전 배송", ischecked: true),
+        BasketModel(image: UIImage(named: "book_image2"), name: "피아노 치는 할머니가 될래", price: 14400, quantity: "1", deliveryInfo: "11월 7일(월) 밤 11시 잠들기전 배송", ischecked: true),
+        BasketModel(image: UIImage(named: "book_image1"), name: "기소영의 친구들2", price: 20800, quantity: "1", deliveryInfo: "11월 8일(화) 아침 11시전 배송", ischecked: true),
+        BasketModel(image: UIImage(named: "book_image2"), name: "피아노 치는 할아버지가 될래", price: 18400, quantity: "1", deliveryInfo: "11월 8일(화) 아침 11시전 배송", ischecked: false)
+    ]
+    
     
     // MARK: - UI Components
     
@@ -184,6 +200,10 @@ extension BasketVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let basketCell = tableView.dequeueReusableCell(withIdentifier: BasketTableViewCell.identifier, for: indexPath) as? BasketTableViewCell else { return UITableViewCell() }
         
+        for i in 0...indexPath.row {
+            basketDummy[i].ischecked = isChecked
+        }
+
         basketCell.dataBind(model: basketDummy[indexPath.row])
         return basketCell
     }
@@ -191,11 +211,11 @@ extension BasketVC : UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
 
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: BasketHeaderView.identifier) as! BasketHeaderView
+        view.delegate = self
         return view
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-
         let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: BasketFooterView.identifier) as! BasketFooterView
         return view
     }
@@ -206,5 +226,11 @@ extension BasketVC : UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 92
+    }
+}
+
+extension BasketVC : BasketHeaderDelegate {
+    func buttonState(bool: Bool) {
+        isChecked = bool
     }
 }

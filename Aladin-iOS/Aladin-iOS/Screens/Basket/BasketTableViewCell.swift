@@ -13,12 +13,16 @@ class BasketTableViewCell: UITableViewCell {
     
     static let identifier = "BasketTableViewCell"
     
+    var isChecked: Bool = false {
+        didSet {
+            isChecked == true ? selected() : deselected()
+        }
+    }
+    
     lazy var checkbox = UIButton().then {
-        $0.isSelected = true
-        $0.setImage(ImageLiterals.Icons.checkActive, for: .selected)
-        $0.setImage(ImageLiterals.Icons.checkInActive, for: .normal)
         $0.addTarget(self, action: #selector(checkBtnDidTap), for: .touchUpInside)
     }
+    
     var image = UIImageView()
     var name = UILabel().then {
         $0.font = .systemFont(ofSize: 12, weight: .semibold)
@@ -55,8 +59,18 @@ class BasketTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    private func selected() {
+        checkbox.setImage(ImageLiterals.Icons.checkActive, for: .normal)
+        checkbox.isSelected = true
+    }
+    private func deselected() {
+        checkbox.setImage(ImageLiterals.Icons.checkInActive, for: .normal)
+        checkbox.isSelected = false
+    }
+    
     @objc private func checkBtnDidTap() {
-        checkbox.isSelected.toggle()
+        isChecked.toggle()
+        print(checkbox.isSelected)
     }
 }
 
@@ -113,9 +127,9 @@ extension BasketTableViewCell {
     func dataBind(model: BasketModel) {
         image.image = model.image
         name.text = model.name
-        price.text = "\(model.price)원"
+        price.text = "\(addComma(value: model.price))"
         quantity.text = model.quantity
         deliveryInfo.text = model.deliveryInfo
-        checkbox.isSelected = model.ischecked
+        isChecked = model.ischecked
     }
 }
