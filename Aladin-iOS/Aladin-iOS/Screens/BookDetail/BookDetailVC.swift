@@ -15,8 +15,8 @@ class BookDetailVC: UIViewController {
     // MARK: - Properties
     
     let bookProvider = MoyaProvider<BookRouter>(
-    plugins: [NetworkLoggerPlugin(verbose: true)])
-
+        plugins: [NetworkLoggerPlugin(verbose: true)])
+    
     //MARK: - UI Components
     
     // 네비 뷰
@@ -24,7 +24,7 @@ class BookDetailVC: UIViewController {
     private lazy var backBtn = UIButton().then {
         $0.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         $0.tintColor = .black
-        $0.addTarget(self, action: #selector(dissmissVC), for: .touchUpInside)
+        $0.addTarget(self, action: #selector(dismissVC), for: .touchUpInside)
     }
     
     private let searchBtn = UIButton().then {
@@ -48,7 +48,7 @@ class BookDetailVC: UIViewController {
     
     // 책 상세정보 뷰
     private let bookInfoContainerView = UIView()
-    private let bookImage = UIImageView().then {
+    private lazy var bookImage = UIImageView().then {
         $0.image = ImageLiterals.Images.detailBookSample
         $0.contentMode = .scaleAspectFill
     }
@@ -61,15 +61,15 @@ class BookDetailVC: UIViewController {
     private let bookNextImage = UIImageView().then {
         $0.image = ImageLiterals.Icons.bookNext
     }
-    private let bookName = UILabel().then{
+    private let bookName = UILabel().then {
         $0.text = "기소영의 친구들"
         $0.font = .systemFont(ofSize: 20, weight: .bold)
     }
-    private let bookPrize = UILabel().then{
+    private let bookPrize = UILabel().then {
         $0.text = "제2회 사계절어린이문학상 대상 수상작"
         $0.font = .systemFont(ofSize: 14, weight: .medium)
     }
-    private let bookWrite = UILabel().then{
+    private let bookWrite = UILabel().then {
         $0.text = "정은주(지은이) ㅣ 해랑(그림)"
         $0.textColor = UIColor.aladinGray4
         $0.font = .systemFont(ofSize: 12, weight: .medium)
@@ -78,14 +78,14 @@ class BookDetailVC: UIViewController {
     private let bookRatingIcon = UIImageView().then {
         $0.image = ImageLiterals.Icons.star
     }
-    private let bookRatingLabel = UILabel().then{
+    private let bookRatingLabel = UILabel().then {
         $0.text = "4.6"
         $0.font = .systemFont(ofSize: 12, weight: .medium)
     }
     private let bookHeartIcon = UIImageView().then {
         $0.image = ImageLiterals.Icons.heart
     }
-    private let bookHeartLabel = UILabel().then{
+    private let bookHeartLabel = UILabel().then {
         $0.text = "3,785"
         $0.font = .systemFont(ofSize: 12, weight: .medium)
     }
@@ -410,6 +410,7 @@ class BookDetailVC: UIViewController {
         setLayout()
         setNavigationBarHidden()
         register()
+        fetchBookDetail(id: 2)
     }
     
     private func setNavigationBarHidden() {
@@ -427,14 +428,13 @@ class BookDetailVC: UIViewController {
     @objc private func touchUpBasketBtn() {
         pushToBasketVC()
     }
-    
-    @objc private func dissmissVC() {
-        self.dismiss(animated: true)
-    }
-    
     @objc private func heartToolBtnDidTap() {
         heartToolBtn.isSelected.toggle()
         fetchBookLike(bookId: 2)
+    }
+    
+    @objc private func dismissVC() {
+        self.dismiss(animated: true)
     }
 }
 
@@ -599,59 +599,61 @@ extension BookDetailVC {
         bookImage.snp.makeConstraints{
             $0.centerX.equalToSuperview()
             $0.top.equalToSuperview().offset(15)
+            $0.height.equalTo(254)
+            $0.width.equalTo(176)
         }
         
-        goldStickerImage.snp.makeConstraints{
+        goldStickerImage.snp.makeConstraints {
             $0.top.equalTo(bookImage.snp.top)   //근데 시뮬레이터에서 top이 동일하지 않음..
             $0.leading.equalTo(bookImage.snp.trailing).offset(9)
             $0.height.equalTo(46)
         }
         
-        bookBackImage.snp.makeConstraints{
+        bookBackImage.snp.makeConstraints {
             $0.centerY.equalTo(bookImage)
             $0.trailing.equalTo(bookImage.snp.leading).offset(-4)
             $0.width.height.equalTo(32)
         }
         
-        bookNextImage.snp.makeConstraints{
+        bookNextImage.snp.makeConstraints {
             $0.centerY.equalTo(bookImage)
             $0.leading.equalTo(bookImage.snp.trailing).offset(4)
             $0.width.height.equalTo(32)
         }
         
-        bookName.snp.makeConstraints{
+        bookName.snp.makeConstraints {
             $0.top.equalTo(bookImage.snp.bottom).offset(14)
             $0.centerX.equalToSuperview()
         }
         
-        bookPrize.snp.makeConstraints{
+        bookPrize.snp.makeConstraints {
             $0.top.equalTo(bookName.snp.bottom).offset(4)
             $0.centerX.equalTo(bookName)
         }
 
-        bookWrite.snp.makeConstraints{
+        bookWrite.snp.makeConstraints {
             $0.top.equalTo(bookPrize.snp.bottom).offset(4)
             $0.centerX.equalTo(bookPrize)
         }
-        bookRatingContainerView.snp.makeConstraints{
+        bookRatingContainerView.snp.makeConstraints {
             $0.top.equalTo(bookWrite.snp.bottom).offset(21)
             $0.centerX.equalTo(bookWrite)
             $0.width.equalTo(104)
             $0.height.equalTo(16)
         }
-        bookRatingIcon.snp.makeConstraints{
+        bookRatingIcon.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
             $0.height.width.equalTo(16)
         }
-        bookRatingLabel.snp.makeConstraints{
+        bookRatingLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(bookRatingIcon.snp.trailing).offset(4)
         }
-        bookHeartIcon.snp.makeConstraints{
+        bookHeartIcon.snp.makeConstraints {
             $0.leading.equalTo(bookRatingLabel.snp.trailing).offset(12)
             $0.height.width.equalTo(16)
         }
-        bookHeartLabel.snp.makeConstraints{
+        bookHeartLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview()
         }
@@ -700,7 +702,7 @@ extension BookDetailVC {
         
         //MARK: - containerViewLayout
         
-        bookPriceContainerView.snp.makeConstraints{
+        bookPriceContainerView.snp.makeConstraints {
             $0.top.equalTo(bookInfoContainerView.snp.bottom)
             $0.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             $0.height.equalTo(219)
@@ -1056,6 +1058,47 @@ extension BookDetailVC {
                     do {
                         let responseDto = try result.map(BookLikeResponseDTO.self)
                         self.heartToolBtn.isSelected = responseDto.data.hasLike
+                    }
+                    catch(let error) {
+                        print(error.localizedDescription)
+                    }
+                } else if status >= 400 {
+                    print("400 error")
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    func discount(origin: Int, discountRate: Int) -> Int {
+        let result : Int = origin * (100 - discountRate) / 100
+        return result
+    }
+    
+    func fetchDetail(data: BookDetailResponseDTO) {
+        let data = data.data
+        self.bookImage.loadURLImage(URL(string: data.cover)!)
+        self.bookName.text = data.name
+        self.bookIntroDetail.text = data.description
+        self.bookPrize.text = data.intro
+        self.bookWrite.text = "\(data.author)(지은이) | \(data.painter)(그림)"
+        self.originPrice.text = "\(addComma(value: data.price))"
+        self.discountPrice.text = "\(addComma(value: self.discount(origin: data.price, discountRate: data.discount_rate)))"
+        self.bookIntroDetail.text = data.content
+        self.bookStoryDetail.text = data.summary
+        self.heartToolBtn.isSelected = data.like
+    }
+    
+    func fetchBookDetail(id: Int){
+        bookProvider.request(.fetchBookDetail(id: id)) { response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        let responseDetailDto = try result.map(BookDetailResponseDTO.self)
+                        self.fetchDetail(data: responseDetailDto)
                     }
                     catch(let error) {
                         print(error.localizedDescription)

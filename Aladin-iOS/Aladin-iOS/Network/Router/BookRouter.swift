@@ -11,6 +11,7 @@ import Moya
 
 enum BookRouter {
     case fetchBookLike(bookId: Int)
+    case fetchBookDetail(id: Int)
 }
 
 extension BookRouter: TargetType {
@@ -22,6 +23,8 @@ extension BookRouter: TargetType {
         switch self {
         case .fetchBookLike(let bookId):
             return "\(APIConstants.book)/\(bookId)/like"
+        case .fetchBookDetail(let id):
+            return "\(APIConstants.book)/\(id)"
         }
     }
     
@@ -29,6 +32,8 @@ extension BookRouter: TargetType {
         switch self {
         case .fetchBookLike:
             return .put
+        case .fetchBookDetail:
+            return .get
         }
     }
     
@@ -37,6 +42,9 @@ extension BookRouter: TargetType {
         case .fetchBookLike(let bookId):
             return .requestParameters(parameters: [
                 "bookId": bookId], encoding: URLEncoding.queryString)
+        case .fetchBookDetail(let id):
+            return .requestParameters(parameters: [
+                "id": id], encoding: URLEncoding.queryString)
         }
     }
     
