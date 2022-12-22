@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import Moya
 
 
 final class HomeVC: UITabBarController {
@@ -210,6 +211,43 @@ final class HomeVC: UITabBarController {
         $0.image = ImageLiterals.Images.bottomBook
     }
     
+    let bookListProvider = MoyaProvider<BookListRouter>(
+            plugins: [NetworkLoggerPlugin(verbose: true)]
+        )
+    
+    var pickArray: [BookListDataArray] = []
+    var topicArray: [BookListDataArray] = []
+    var bookListResponse: BookListResponseDTO?
+    
+    
+    func bookListAPI() {
+        bookListProvider.request(.BookList) { response in
+            switch response {
+            case .success(let result):
+                let status = result.statusCode
+                if status >= 200 && status < 300 {
+                    do {
+                        self.bookListResponse = try result.map(BookListResponseDTO?.self)!
+                        guard let pickArray = self.bookListResponse?.data.pick else { return }
+                        guard let topicArray = self.bookListResponse?.data.topic else { return }
+                        self.hotBookContainerView.topicViewArray = topicArray
+                    } catch(let err) {
+                        print(err.localizedDescription)
+                    }
+                } else if status >= 400 {
+                    print("err")
+                }
+            case .failure(let err):
+                print(err.localizedDescription)
+            }
+        }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        bookListAPI()
+    }
 
     // MARK: - View Life Cycle
     
