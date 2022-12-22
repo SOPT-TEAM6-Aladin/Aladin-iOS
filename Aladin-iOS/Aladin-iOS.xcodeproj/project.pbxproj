@@ -14,6 +14,9 @@
 		140A387F292E090700208C8D /* BasketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A387E292E090700208C8D /* BasketModel.swift */; };
 		140A3883292FEEFB00208C8D /* BasketHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A3882292FEEFB00208C8D /* BasketHeaderView.swift */; };
 		140A38852930A04C00208C8D /* BasketFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A38842930A04C00208C8D /* BasketFooterView.swift */; };
+		14A7C1412933C8F90001AEB4 /* BookDetailResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7C1402933C8F90001AEB4 /* BookDetailResponseDTO.swift */; };
+		14A7C1432934AEBF0001AEB4 /* LoadURLImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7C1422934AEBF0001AEB4 /* LoadURLImage.swift */; };
+		14A7C1452934D2540001AEB4 /* addComma.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A7C1442934D2540001AEB4 /* addComma.swift */; };
 		8E333A9E292293FF003E08B4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9D292293FF003E08B4 /* AppDelegate.swift */; };
 		8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333A9F292293FF003E08B4 /* SceneDelegate.swift */; };
 		8E333AA2292293FF003E08B4 /* MainTBC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E333AA1292293FF003E08B4 /* MainTBC.swift */; };
@@ -60,6 +63,9 @@
 		140A387E292E090700208C8D /* BasketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketModel.swift; sourceTree = "<group>"; };
 		140A3882292FEEFB00208C8D /* BasketHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketHeaderView.swift; sourceTree = "<group>"; };
 		140A38842930A04C00208C8D /* BasketFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketFooterView.swift; sourceTree = "<group>"; };
+		14A7C1402933C8F90001AEB4 /* BookDetailResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookDetailResponseDTO.swift; sourceTree = "<group>"; };
+		14A7C1422934AEBF0001AEB4 /* LoadURLImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadURLImage.swift; sourceTree = "<group>"; };
+		14A7C1442934D2540001AEB4 /* addComma.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addComma.swift; sourceTree = "<group>"; };
 		8E333A9A292293FF003E08B4 /* Aladin-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Aladin-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8E333A9D292293FF003E08B4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8E333A9F292293FF003E08B4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -231,6 +237,7 @@
 			children = (
 				8EE879BB2931FD8A005F7AEC /* BookLikeResponseDTO.swift */,
 				A33402FE294C524500514DEE /* BookListResponseDTO.swift */,
+				14A7C1402933C8F90001AEB4 /* BookDetailResponseDTO.swift */,
 			);
 			path = DTO;
 			sourceTree = "<group>";
@@ -295,6 +302,8 @@
 			isa = PBXGroup;
 			children = (
 				8E4FE7AC292381F600E9F36A /* Adjusted+.swift */,
+				14A7C1422934AEBF0001AEB4 /* LoadURLImage.swift */,
+				14A7C1442934D2540001AEB4 /* addComma.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -406,6 +415,7 @@
 				140A3878292BD7FC00208C8D /* BookReviewTableViewCell.swift in Sources */,
 				140A387C292E08EF00208C8D /* BasketTableViewCell.swift in Sources */,
 				8E333AA2292293FF003E08B4 /* MainTBC.swift in Sources */,
+				14A7C1432934AEBF0001AEB4 /* LoadURLImage.swift in Sources */,
 				8E4FE7AF2923822500E9F36A /* addSubviews.swift in Sources */,
 				A305F36D292DF31D00FDF5DD /* HotBookModel.swift in Sources */,
 				8E7984DF29237FB100EDC6E3 /* ImageLiterals.swift in Sources */,
@@ -426,7 +436,9 @@
 				8E4FE7B329238B3800E9F36A /* FontLiterals.swift in Sources */,
 				8E333AA0292293FF003E08B4 /* SceneDelegate.swift in Sources */,
 				A305F37129308C3300FDF5DD /* ListModel.swift in Sources */,
+				14A7C1452934D2540001AEB4 /* addComma.swift in Sources */,
 				A305F36B292D730400FDF5DD /* HotBookCVC.swift in Sources */,
+				14A7C1412933C8F90001AEB4 /* BookDetailResponseDTO.swift in Sources */,
 				8EE879B22931F065005F7AEC /* APIConstants.swift in Sources */,
 				140A38852930A04C00208C8D /* BasketFooterView.swift in Sources */,
 				8EE879BC2931FD8A005F7AEC /* BookLikeResponseDTO.swift in Sources */,
@@ -458,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BASE_URL = "http://13.124.216.89:3000/api";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -518,6 +531,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				BASE_URL = "http://13.124.216.89:3000/api";
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -573,6 +587,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "http://13.124.216.89:3000/";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R6RDNJW78B;
@@ -583,6 +598,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -602,6 +618,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BASE_URL = "http://13.124.216.89:3000/";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = R6RDNJW78B;
@@ -612,6 +629,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

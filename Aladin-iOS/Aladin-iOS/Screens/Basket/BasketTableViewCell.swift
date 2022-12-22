@@ -13,13 +13,16 @@ class BasketTableViewCell: UITableViewCell {
     
     static let identifier = "BasketTableViewCell"
     
-    var checkboxActive = UIImageView().then {
-        $0.image = ImageLiterals.Icons.checkActive
+    var isChecked: Bool = false {
+        didSet {
+            isChecked == true ? selected() : deselected()
+        }
     }
-    var checkboxInActive = UIImageView().then {
-        $0.image = ImageLiterals.Icons.checkInActive
+    
+    lazy var checkbox = UIButton().then {
+        $0.addTarget(self, action: #selector(checkBtnDidTap), for: .touchUpInside)
     }
-    var checkbox = UIImageView()
+    
     var image = UIImageView()
     var name = UILabel().then {
         $0.font = .systemFont(ofSize: 12, weight: .semibold)
@@ -55,13 +58,25 @@ class BasketTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func selected() {
+        checkbox.setImage(ImageLiterals.Icons.checkActive, for: .normal)
+        checkbox.isSelected = true
+    }
+    private func deselected() {
+        checkbox.setImage(ImageLiterals.Icons.checkInActive, for: .normal)
+        checkbox.isSelected = false
+    }
+    
+    @objc private func checkBtnDidTap() {
+        isChecked.toggle()
+        print(checkbox.isSelected)
+    }
 }
 
 extension BasketTableViewCell {
     func setLayout() {
         contentView.addSubviews(
-            checkboxActive,
-            checkboxInActive,
             checkbox,
             image,
             name,
@@ -112,13 +127,9 @@ extension BasketTableViewCell {
     func dataBind(model: BasketModel) {
         image.image = model.image
         name.text = model.name
-        price.text = model.price
+        price.text = "\(addComma(value: model.price))"
         quantity.text = model.quantity
         deliveryInfo.text = model.deliveryInfo
-        if model.ischecked {
-            checkbox.image = checkboxActive.image
-        } else {
-            checkbox.image = checkboxInActive.image
-        }
+        isChecked = model.ischecked
     }
 }
